@@ -15,6 +15,7 @@
     <script src="https://kit.fontawesome.com/98046bca06.js" crossorigin="anonymous"></script>
 </head>
 
+
 <body>
 
     <div class="wrapper d-flex align-items-stretch">
@@ -267,31 +268,42 @@
                 <i class="fa fa-bars"></i>
             </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Sobre</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Ajuda</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Contato</a>
-                            </li>
-                            <li class="nav-item active usuario" onClick="navUser()">
-                                <a class="nav-link" href="/logout"><i class="fas fa-user-alt"></i> Vitor Abreu <i class="fas fa-caret-down"></i>
-                                    <div class="hidden" id="mostrarUser" >
-                                        <img src="/res/system/images/icone-user.jpg"> <br>
-                                        <i>Vitor dos Santos Abreu</i>
-                                        <button  class="bLeft btn-dark">Meus dados</button>
-                                        <button class="bRight btn-dark">Sair</button>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item active usuario">
+                        <div class="dropdown show">
+                            <a class="nav nav-link dropdown" href="#" role="navigation" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user-circle"></i> Vitor Abreu
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#"> <img src="/res/system/images/icone-user.jpg" alt="#"></a>
+                                <a class="dropdown-item" href="#">Configuração <i class="fa fa-tools"></i></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Ajuda <i class="iconeUser fa fas fa-question-circle"></i></a>
+                                <a class="dropdown-item" href="#">Sobre <i class="iconeUser fa fas fa-info-circle"></i></a>
+                                <a class="dropdown-item" href="/sair">Sair <i class="iconeUser fa fas fa-sign-out-alt"></i></a>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
                 </div>
             </nav>
+            </div>
+            </div>
+
+        <script src="/res/system/js/funcoes.js"></script>
+        <script src="/res/system/js/jquery.min.js"></script>
+        <script src="/res/system/js/popper.js"></script>
+        <script src="/res/system/js/bootstrap.min.js"></script>
+        <script src="/res/system/js/main.js"></script>
+        
+        
+        </body>
+
+        </html>
