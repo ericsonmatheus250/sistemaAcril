@@ -10999,8 +10999,6 @@ h5,
     position: block;
 }
 
-
-
 .navbar-btn {
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -11129,8 +11127,8 @@ a[data-toggle="collapse"] {
     color: rgba(255, 255, 255, 0.5);
 }
 
-/*a parti daqui style fora do bootstrap*/
 
+/*a parti daqui style fora do bootstrap*/
 
 .hidden {
     border: 1px solid #000;
@@ -11143,27 +11141,31 @@ a[data-toggle="collapse"] {
     margin-top: 18px;
     margin-left: -45px;
     position: absolute;
-
 }
 
 .hidden button {
     margin-top: 20px;
 }
-.bRight
- {
-        margin-left: 20px;
+
+.bRight {
+    margin-left: 20px;
 }
 
 .bLeft {
-         margin-right: 20px;
+    margin-right: 20px;
 }
 
-#jaIframe{
+#jaIframe {
     position: absolute;
 }
 
-.importante{
+.importante {
     color: red;
 }
 
-
+.container {
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 2px 0.1px rgba(227, 227, 227, 0.7);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
