@@ -1,69 +1,61 @@
-            <h2 class="mb-4">Fornecedor</h2>
-            <form>
-                <div class="form-group">
-                    <label for="idNome">Nome<i class="importante">*</i></label>
-                    <input type="text" class="form-control" id="idNome">
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="idCpf">CPF / CNPJ<i class="importante">*</i></label>
-                        <input type="text" class="form-control" id="idCpf">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="idTipoClie">Tipo de Fornecedor<i class="importante">*</i></label>
-                        <select id="idTipoClie" class="form-control">
-                  <option selected>Escolher...</option>
-                  <option>Fisico</option>
-                  <option>Juridico</option>
-                </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="idEmail">E-mail</label>
-                        <input type="text" class="form-control" id="idEmail">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="idTelefone">Telefone<i class="importante">*</i></label>
-                        <input type="text" class="form-control" id="idTelefone" maxlength="14" OnKeyPress="formatar('##-# ####-####', this)">
-                    </div>
+<h2 class="mb-4"><i class="fas fa-truck"></i> Fornecedor</h2>
+            <nav class="navbar navbar-expand-sm">
+                <div class="container-fluid">
+                    <button type="submit" class="btn btn-primary"><a href="/_cadastro/CadastroFornecedor.html" style="color:green;">Adicionar</a></button>
 
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="cep">CEP<i class="importante">*</i></label>
-                        <input type="text" class="form-control" id="cep" name="cep" value="" maxlength="9" onblur="pesquisacep(this.value);" onkeypress="formatar('#####-###', this)">
-                    </div>
-                    <div class="form-group col-md-1">
-                        <label for="uf">Estado</label>
-                        <input type="text" class="form-control" id="uf" name="uf">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="cidade">Cidade</label>
-                        <input type="text" class="form-control" id="cidade" name="cidade">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="bairro">Bairro</label>
-                        <input type="text" class="form-control" id="bairro" name="bairro">
-                    </div>
-                </div>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="logradouro">Logradouro</label>
-                        <input type="text" class="form-control" id=rua name="logradouro">
-                    </div>
-                    <div class="form-gorup col-md-2">
-                        <label for="numero">Número<i class="importante">*</i></label>
-                        <input type="number" class="form-control" id="numero" name="numero">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="complemento">Complemento</label>
-                        <input type="text" class="form-control" id="complemento" name="complemento">
+                                <form class="form-inline">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Procurar</button>
+                                </form>
+
+                            </li>
+
+                        </ul>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
-                <button type="submit" class="btn btn-danger" style="float: right;">Cancelar</button>
-            </form>
+            </nav>
+            <table class="table">
+                <caption>Lista de Fornecedores</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Estado</th>
+                        <th scope="colgroup">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>vitor santos</td>
+                        <td>@gmail</td>
+                        <td>(61)9 9996-3966</td>
+                        <td>ativo</td>
+                        <td>
+                            <a class="btn btn-outline-success" title="visualizar"><i class="fas fa-search"></i></a>
+                            <a href="#" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
+                            <a href="#" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Fornecedor</td>
+                        <td>@hotmail</td>
+                        <td>(61)0 0000-0000</td>
+                        <td>desativado</td>
+                        <td>
+                            <a class="btn btn-outline-success" title="visualizar"><i class="fas fa-search"></i></a>
+                            <a href="#" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
+                            <a href="#" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
-    </div>

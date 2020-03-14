@@ -120,6 +120,15 @@
 		$page->setTpl("Produto");
 	});
 
+	$app->get('/Produto/CadastrarProduto', function() 
+	{
+		User::verifyLogin();
+		
+		$page = new Page();
+
+		$page->setTpl("CadastrarProduto");
+	});
+
 
 	$app->run();
 
