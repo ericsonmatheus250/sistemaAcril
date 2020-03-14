@@ -52,6 +52,8 @@
 	 */
 	$app->get('/Funcionario', function()
 	{
+		User::verifyLogin();
+		
 		$page = new Page();
 
 		$page->setTpl("Funcionario");
@@ -62,6 +64,8 @@
 	 */
 	$app->get('/Cliente', function()
 	{
+		User::verifyLogin();
+		
 		$page = new Page();
 
 		$page->setTpl("Cliente");
@@ -85,6 +89,8 @@
 	 */
 	$app->get('/Servico', function() 
 	{
+		User::verifyLogin();
+		
 		$page = new Page();
 
 		$page->setTpl("Servico");
@@ -96,6 +102,8 @@
 	 */
 	$app->get('/Fornecedor', function() 
 	{
+		User::verifyLogin();
+		
 		$page = new Page();
 
 		$page->setTpl("Fornecedor");
@@ -105,6 +113,8 @@
 	 */
 	$app->get('/Produto', function()
 	{
+		User::verifyLogin();
+		
 		$page = new Page();
 
 		$page->setTpl("Produto");

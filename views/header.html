@@ -285,7 +285,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Ajuda <i class="iconeUser fa fas fa-question-circle"></i></a>
                                 <a class="dropdown-item" href="#">Sobre <i class="iconeUser fa fas fa-info-circle"></i></a>
-                                <a class="dropdown-item" href="/sair">Sair <i class="iconeUser fa fas fa-sign-out-alt"></i></a>
+                                <a class="dropdown-item" href="/logout">Sair <i class="iconeUser fa fas fa-sign-out-alt"></i></a>
                             </div>
                         </div>
 
