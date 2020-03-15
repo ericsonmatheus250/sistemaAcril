@@ -3,7 +3,7 @@
 
                 <nav class="navbar navbar-expand-sm">
                     <div class="container-fluid">
-                        <button type="submit" class="btn btn-primary"><a href="/Produto/CadastrarProduto" style="color:green;">Adicionar</a></button>
+                        <button type="submit" class="btn btn-primary"><a href="/Produto/CadastroProduto" style="color:green;">Adicionar</a></button>
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="nav navbar-nav ml-auto">

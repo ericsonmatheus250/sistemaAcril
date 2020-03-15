@@ -47,6 +47,20 @@
 		$page->setTpl("index");
 	});
 
+
+	/*
+	 * Logout do sistema
+	 */
+	$app->get('/logout', function()
+	{
+		User::logout(); 
+
+		header("Location: /");
+
+		exit;
+	});
+
+
 	/*
 	 *Editar Funcionario
 	 */
@@ -58,6 +72,16 @@
 
 		$page->setTpl("Funcionario");
 	});
+
+	$app->get('/Funcionario/CadastroFuncionario', function()
+	{
+		User::verifyLogin();
+		
+		$page = new Page();
+
+		$page->setTpl("CadastroFuncionario");
+	});
+
 
 	/*
 	 *Editar Cliente
@@ -71,18 +95,6 @@
 		$page->setTpl("Cliente");
 	});
 
-
-	/*
-	 * Logout do sistema
-	 */
-	$app->get('/logout', function()
-	{
-		User::logout(); //falta colocar pra funcionar na tela principal
-
-		header("Location: /");
-
-		exit;
-	});
 
 	/*
 	 * Editar Serviços da empresa
@@ -120,13 +132,13 @@
 		$page->setTpl("Produto");
 	});
 
-	$app->get('/Produto/CadastrarProduto', function() 
+	$app->get('/Produto/CadastroProduto', function() 
 	{
 		User::verifyLogin();
-		
+
 		$page = new Page();
 
-		$page->setTpl("CadastrarProduto");
+		$page->setTpl("CadastroProduto");
 	});
 
 
