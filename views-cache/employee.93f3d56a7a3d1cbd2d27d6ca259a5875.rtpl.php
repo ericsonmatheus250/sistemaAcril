@@ -26,23 +26,25 @@
                         <th scope="col">Nome</th>
                         <th scope="col">E-mail</th>
                         <th scope="col">Número</th>
-                        <th scope="col">Estado</th>
+                        <th scope="col">Login</th>
                         <th scope="colgroup">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $counter1=-1;  if( isset($employees) && ( is_array($employees) || $employees instanceof Traversable ) && sizeof($employees) ) foreach( $employees as $key1 => $value1 ){ $counter1++; ?>
                     <tr>
-                        <th scope="row">2</th>
-                        <td>Ericson</td>
-                        <td>@hotmail</td>
-                        <td>(61)0 0000-0000</td>
-                        <td>desativado</td>
+                        <th scope="row"><?php echo htmlspecialchars( $value1["matricula_funcionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?></th>
+                        <td><?php echo htmlspecialchars( $value1["nomePessoa"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                        <td><?php echo htmlspecialchars( $value1["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                        <td><?php echo htmlspecialchars( $value1["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                        <td>Ativo</td>
                         <td>
                             <a class="btn btn-outline-success" title="visualizar"><i class="fas fa-search"></i></a>
-                            <a href="/Funcionario/update" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
-                            <a href="#" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
+                            <a href="/Funcionario/<?php echo htmlspecialchars( $value1["matricula_funcionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
+                            <a href="/Funcionario/<?php echo htmlspecialchars( $value1["matricula_funcionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onCLick="return confirm('Deseja realmente apagar este registro?')" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
                         </td>
                     </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

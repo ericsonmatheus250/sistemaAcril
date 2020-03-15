@@ -49,9 +49,9 @@
 	});
 
 
-	/*
-	 * Logout do sistema
-	 */
+	/**************************************************************************
+	 * Logout do sistema ------------------------------------------------------
+	**************************************************************************/
 	$app->get('/logout', function()
 	{
 		User::logout(); 
@@ -69,9 +69,13 @@
 	{
 		User::verifyLogin();
 		
+		$employee = Employee::listAll();
+
 		$page = new Page();
 
-		$page->setTpl("employee");
+		$page->setTpl("employee", array(
+			"employees" => $employee
+		));
 	});
 
 	$app->get('/Funcionario/CadastroFuncionario', function()
@@ -87,32 +91,68 @@
 	{
 		User::verifyLogin();
 		
-		$employed = new Employee();
+		$employee = new Employee();
 
-		$_POST['login'] = $employed->generateLogin($_POST['nomePessoa']);
+		$_POST['login'] = $employee->generateLogin($_POST['nomePessoa']);
 
-		$_POST['senha'] = $employed->defaultPassword();
+		$_POST['senha'] = $employee->defaultPassword();
 
-		$_POST['sexo'] = $_POST['sexo'] === "Masculino" ? 'M':'F';
+		$_POST['sexo'] = $_POST['sexo'] == 'Masculino' ? 'M':'F';
 
 		$_POST['dtNascimento'] = implode("-",array_reverse(explode("/",$_POST['dtNascimento'])));
 		
-		$employed->setData($_POST);
+		$employee->setData($_POST);
 
-		$employed->save();
+		$employee->save();
+
+		header("Location: /Funcionario");
+		exit;
+
+	});
+	$app->get('/Funcionario/:matricula_funcionario/delete', function($matricula_funcionario) 
+	{
+		User::verifyLogin();
+
+		$employee = new Employee();
+
+		$employee->get((int) $matricula_funcionario);
+
+		$employee->delete();
 
 		header("Location: /Funcionario");
 		exit;
 
 	});
 
-	$app->get('/Funcionario/update', function() 
+	$app->get('/Funcionario/:matricula_funcionario', function($matricula_funcionario) 
 	{
 		User::verifyLogin();
 		
 		$page = new Page();
 
-		$page->setTpl("employee-update");
+		$employee = new Employee();
+
+		$employee->get((int) $matricula_funcionario);
+
+		$page->setTpl("employee-update", [
+			"employee" => $employee->getValue()
+		]);
+
+	});
+
+	$app->post('/Funcionario/:matricula_funcionario', function($matricula_funcionario) 
+	{
+		User::verifyLogin();
+	
+		$employee = new Employee();
+
+		$employee->get((int) $matricula_funcionario);
+
+		$employee->setData($_POST);
+
+		$employee->save();
+
+		header("Location: /Funcionario");
 
 	});
 

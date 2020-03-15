@@ -8,13 +8,14 @@ const PASSWORD = 123456;
 
 class Employee extends Model
 {
-    /*public static function listAll() 
+    public static function listAll() 
     {
         $sql = new Sql();
 
-        return $sql->select("SELECT * FROM tb_categories ORDER BY idcategory");
+        return $sql->select("SELECT * FROM tb_endereco e INNER JOIN tb_pessoa p USING(id_endereco)
+        INNER JOIN tb_funcionario f USING(id_pessoa)");
 
-    }*/
+    }
     
     public function generateLogin($name)
     {
@@ -65,12 +66,13 @@ class Employee extends Model
 
     }
 
-    /*public function get($idcategory) 
+    public function get($matricula_funcionario) 
     {
         $sql = new Sql();
 
-        $results = $sql->select("SELECT * FROM tb_categories WHERE idcategory = :idcategory", [
-            ':idcategory' => $idcategory
+        $results = $sql->select("SELECT * FROM tb_endereco e INNER JOIN tb_pessoa p USING(id_endereco) 
+            INNER JOIN tb_funcionario f USING(id_pessoa) WHERE f.matricula_funcionario = :matricula_funcionario", [
+            ':matricula_funcionario' => $matricula_funcionario
         ]);
 
         $this->setData($results[0]);
@@ -81,26 +83,16 @@ class Employee extends Model
     {
         $sql = new Sql();
 
-        $sql->query("DELETE FROM tb_categories WHERE idcategory = :idcategory", [
-            ':idcategory' => $this->getidcategory()
+        $sql->query("CALL sp_employee_delete(:matricula_funcionario)", [
+            ':matricula_funcionario' => $this->getmatricula_funcionario()
         ]);
         
-        Employee::updateFile();
     }
 
-    public static function updateFile()
+    public static function getUser()
     {
-        $categories = Employee::listAll();
-
-        $html = [];
-
-        foreach($categories as $row) 
-        {
-            array_push($html, '<li><a href="/categories/'. $row['idcategory']. '">'. $row['descategory'] .'</a></li>');
-        }
-
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "views" . DIRECTORY_SEPARATOR . "categories-menu.html", implode('', $html));
-    }*/
+        
+    }
 }
 
 
