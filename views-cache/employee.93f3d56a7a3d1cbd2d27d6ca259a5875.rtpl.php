@@ -1,4 +1,4 @@
-<h2 class="mb-4"><i class="fas fa-address-card"></i> Funcionário</h2>
+<?php if(!class_exists('Rain\Tpl')){exit;}?>        <h2 class="mb-4"><i class="fas fa-address-card"></i> Funcionário</h2>
             <nav class="navbar navbar-expand-sm">
                 <div class="container-fluid">
                     <button type="submit" class="btn btn-primary"><a href="/Funcionario/CadastroFuncionario" style="color:green;">Adicionar</a></button>
@@ -32,18 +32,6 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>vitor santos</td>
-                        <td>@gmail</td>
-                        <td>(61)9 9996-3966</td>
-                        <td>ativo</td>
-                        <td>
-                            <a class="btn btn-outline-success" title="visualizar"><i class="fas fa-search"></i></a>
-                            <a href="#" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
-                            <a href="#" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
                         <th scope="row">2</th>
                         <td>Ericson</td>
                         <td>@hotmail</td>
@@ -51,11 +39,10 @@
                         <td>desativado</td>
                         <td>
                             <a class="btn btn-outline-success" title="visualizar"><i class="fas fa-search"></i></a>
-                            <a href="#" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
+                            <a href="/Funcionario/update" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
                             <a href="#" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-
         </div>

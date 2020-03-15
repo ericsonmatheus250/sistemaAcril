@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS tb_endereco (
   estado VARCHAR(2) NOT NULL,
   cep VARCHAR(9) NOT NULL,
   numero INT NOT NULL,
+  bairro VARCHAR(45) NOT NULL,
   complemento VARCHAR(30) NULL
 );
 
@@ -43,7 +44,7 @@ CREATE TABLE IF NOT EXISTS tb_pessoa (
   id_pessoa INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   nomePessoa VARCHAR(45) NOT NULL,
   email VARCHAR(45) NULL,
-  telefone VARCHAR(11) NOT NULL,
+  telefone VARCHAR(14) NOT NULL,
   id_endereco INT NOT NULL,
   FOREIGN KEY (id_endereco) REFERENCES tb_endereco (id_endereco)
     ON DELETE NO ACTION
@@ -62,12 +63,12 @@ insert into tb_pessoa (nomePessoa, email, telefone, id_endereco) values ('Constr
 DROP TABLE IF EXISTS tb_funcionario ;
 
 CREATE TABLE IF NOT EXISTS tb_funcionario (
-  matricula_funcionario INT NOT NULL PRIMARY KEY,
-  cpf VARCHAR(11) UNIQUE NOT NULL,
-  rg VARCHAR(12) UNIQUE NOT NULL,
+  matricula_funcionario INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  cpf VARCHAR(14) UNIQUE NOT NULL,
+  rg VARCHAR(14) UNIQUE NOT NULL,
   sexo ENUM('M', 'F') NOT NULL,
   dtNascimento DATE NOT NULL,
-  login VARCHAR(20) NOT NULL,
+  login VARCHAR(26) NOT NULL,
   senha VARCHAR(256) NOT NULL,
   id_pessoa INT NOT NULL,
   FOREIGN KEY (id_pessoa) REFERENCES tb_pessoa (id_pessoa)
@@ -77,7 +78,7 @@ CREATE TABLE IF NOT EXISTS tb_funcionario (
 
 -- Insert de dados para teste
 
-insert into tb_funcionario (matricula_funcionario, cpf, rg, sexo, dtNascimento, login, senha, id_pessoa) values ('1112','999.999.999-99','99999999999', 'M', 1998-11-10, 'admin', '$2y$12$YlooCyNvyTji8bPRcrfNfOKnVMmZA9ViM2A3IpFjmrpIbp5ovNmga',2);
+insert into tb_funcionario (cpf, rg, sexo, dtNascimento, login, senha, id_pessoa) values ('999.999.999-99','99999999999', 'M', 1998-11-10, 'admin', '$2y$12$YlooCyNvyTji8bPRcrfNfOKnVMmZA9ViM2A3IpFjmrpIbp5ovNmga',2);
 
 -- -----------------------------------------------------
 -- Table tb_fornecedor
@@ -122,7 +123,7 @@ DROP TABLE IF EXISTS tb_fornecedorFisico ;
 
 CREATE TABLE IF NOT EXISTS tb_fornecedorFisico (
   id_fornecedorFisico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  cpf VARCHAR(11) UNIQUE NOT NULL,
+  cpf VARCHAR(14) UNIQUE NOT NULL,
   id_fornecedor INT NOT NULL,
   FOREIGN KEY (id_fornecedor) REFERENCES tb_fornecedor (id_fornecedor)
     ON DELETE NO ACTION
@@ -160,7 +161,7 @@ DROP TABLE IF EXISTS tb_clienteFisico ;
 
 CREATE TABLE IF NOT EXISTS tb_clienteFisico (
   id_clienteFisico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  cpf VARCHAR(11) UNIQUE NOT NULL,
+  cpf VARCHAR(14) UNIQUE NOT NULL,
   id_cliente INT NOT NULL,
   FOREIGN KEY (id_cliente) REFERENCES tb_cliente (id_cliente)
     ON DELETE NO ACTION
@@ -223,7 +224,7 @@ CREATE TABLE IF NOT EXISTS tb_venda (
 
 -- Insert de dados para teste
 
-insert into tb_venda (dataVenda, precoVenda, desconto, valorTotal, id_funcionario, id_cliente) values (now(), 50.0, 2.0, 48.0, 1112, 1);
+insert into tb_venda (dataVenda, precoVenda, desconto, valorTotal, id_funcionario, id_cliente) values (now(), 50.0, 2.0, 48.0, 1, 1);
 
 -- -----------------------------------------------------
 -- Table tb_compra
@@ -242,7 +243,7 @@ CREATE TABLE IF NOT EXISTS tb_compra (
 
 -- Insert de dados para teste
 
-insert into tb_compra (dataCompra, valorCompra, id_funcionario, id_fornecedor) values (now(), 50.0, 1112, 1);
+insert into tb_compra (dataCompra, valorCompra, id_funcionario, id_fornecedor) values (now(), 50.0, 1, 1);
 
 -- -----------------------------------------------------
 -- Table tb_produto
@@ -250,7 +251,7 @@ insert into tb_compra (dataCompra, valorCompra, id_funcionario, id_fornecedor) v
 DROP TABLE IF EXISTS tb_produto ;
 
 CREATE TABLE IF NOT EXISTS tb_produto (
-  cod_produto INT NOT NULL PRIMARY KEY,
+  cod_produto INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nomeProduto VARCHAR(45) NOT NULL,
   codigoBarra VARCHAR(45) NOT NULL,
   corProduto VARCHAR(45) NOT NULL,
@@ -259,9 +260,9 @@ CREATE TABLE IF NOT EXISTS tb_produto (
 
 -- Insert de dados para teste
 
-insert into tb_produto (cod_produto, nomeProduto, codigoBarra, corProduto, notaFiscal) values (1515, 'Acessorio Veda Poeira', '0100101100011', 'fosco', '');
-insert into tb_produto (cod_produto, nomeProduto, codigoBarra, corProduto, notaFiscal) values (1545, 'janela 4 folhas', '01001101100011', 'fumê', '');
-insert into tb_produto (cod_produto, nomeProduto, codigoBarra, corProduto, notaFiscal) values (1535, 'perfil', '01111101100011', 'cinza', '');
+insert into tb_produto (cod_produto, nomeProduto, codigoBarra, corProduto, notaFiscal) values (1, 'Acessorio Veda Poeira', '0100101100011', 'fosco', '');
+insert into tb_produto (cod_produto, nomeProduto, codigoBarra, corProduto, notaFiscal) values (2, 'janela 4 folhas', '01001101100011', 'fumê', '');
+insert into tb_produto (cod_produto, nomeProduto, codigoBarra, corProduto, notaFiscal) values (3, 'perfil', '01111101100011', 'cinza', '');
 
 -- -----------------------------------------------------
 -- Table tb_itemVendido
@@ -284,7 +285,7 @@ CREATE TABLE IF NOT EXISTS tb_itemVendido (
 
 -- Insert de dados para teste
 
-insert into tb_itemVendido (precoVenda, quantidadeVenda, id_venda, cod_produto) values (50.0, 1, 1, 1515);
+insert into tb_itemVendido (precoVenda, quantidadeVenda, id_venda, cod_produto) values (50.0, 1, 1, 1);
 
 -- -----------------------------------------------------
 -- Table tb_itemComprado
@@ -307,7 +308,7 @@ CREATE TABLE IF NOT EXISTS tb_itemComprado (
 
 -- Insert de dados para teste
 
-insert into tb_itemComprado (precoCompra, quantidade, id_compra, cod_produto) values (50.0, 1, 1, 1515);
+insert into tb_itemComprado (precoCompra, quantidade, id_compra, cod_produto) values (50.0, 1, 1, 1);
 
 -- -----------------------------------------------------
 -- Table tb_estoque
@@ -328,9 +329,9 @@ CREATE TABLE IF NOT EXISTS tb_estoque (
 
 -- Insert de dados para teste
 
-insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, qtdReal) values (1515, 15, 50, 45, 45);
-insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, qtdReal) values (1545, 15, 50, 45, 45);
-insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, qtdReal) values (1535, 15, 50, 45, 45);
+insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, qtdReal) values (1, 15, 50, 45, 45);
+insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, qtdReal) values (2, 15, 50, 45, 45);
+insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, qtdReal) values (3, 15, 50, 45, 45);
 
 -- -----------------------------------------------------
 -- Table tb_acessorio
@@ -338,7 +339,7 @@ insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, 
 DROP TABLE IF EXISTS tb_acessorio ;
 
 CREATE TABLE IF NOT EXISTS tb_acessorio (
-  id_acessorio INT NOT NULL PRIMARY KEY,
+  id_acessorio INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   tipo VARCHAR(45) NOT NULL,
   cod_produto INT NOT NULL,
   FOREIGN KEY (cod_produto) REFERENCES tb_produto (cod_produto)
@@ -348,7 +349,7 @@ CREATE TABLE IF NOT EXISTS tb_acessorio (
 
 -- Insert de dados para teste
 
-insert into tb_acessorio (id_acessorio, tipo, cod_produto) values (15321, 'veda poeira', 1515);
+insert into tb_acessorio (tipo, cod_produto) values ('veda poeira', 1);
 
 -- -----------------------------------------------------
 -- Table tb_vidro
@@ -356,7 +357,7 @@ insert into tb_acessorio (id_acessorio, tipo, cod_produto) values (15321, 'veda 
 DROP TABLE IF EXISTS tb_vidro ;
 
 CREATE TABLE IF NOT EXISTS tb_vidro (
-  id_vidro INT NOT NULL PRIMARY KEY,
+  id_vidro INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   largura DOUBLE NOT NULL,
   altura DOUBLE NOT NULL,
   espessura DOUBLE NOT NULL,
@@ -369,7 +370,7 @@ CREATE TABLE IF NOT EXISTS tb_vidro (
 
 -- Insert de dados para teste
 
-insert into tb_vidro (id_vidro, largura, altura, espessura, tipo, cod_produto) values (3251, 2.0, 1.0, 8, 'janela', 1545);
+insert into tb_vidro (largura, altura, espessura, tipo, cod_produto) values (2.0, 1.0, 8, 'janela', 2);
 
 -- -----------------------------------------------------
 -- Table tb_aluminio
@@ -377,7 +378,7 @@ insert into tb_vidro (id_vidro, largura, altura, espessura, tipo, cod_produto) v
 DROP TABLE IF EXISTS tb_aluminio ;
 
 CREATE TABLE IF NOT EXISTS tb_aluminio (
-  id_aluminio INT NOT NULL PRIMARY KEY,
+  id_aluminio INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   tipo VARCHAR(45) NULL,
   cod_produto INT NOT NULL,
   FOREIGN KEY (cod_produto) REFERENCES tb_produto (cod_produto)
@@ -387,5 +388,52 @@ CREATE TABLE IF NOT EXISTS tb_aluminio (
 
 -- Insert de dados para teste
 
-insert into tb_aluminio (id_aluminio, tipo, cod_produto) values (32545, 'perfil', 1535);
+insert into tb_aluminio (tipo, cod_produto) values ('perfil', 3);
 
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_employee_save`;
+
+DELIMITER $$
+USE `db_acrilbox`$$
+CREATE PROCEDURE `sp_employee_save` (
+	pnomePessoa VARCHAR(45),
+    pemail VARCHAR(45),
+    ptelefone VARCHAR(11),
+    pcpf VARCHAR(11),
+    prg VARCHAR(12),
+    psexo ENUM('M','F'),
+    pdtNascimento DATE,
+	plogin VARCHAR(20),
+	psenha VARCHAR(250),
+    pcep VARCHAR(9),
+    pestado VARCHAR(2),
+    pcidade VARCHAR(45),
+    pbairro VARCHAR(45),
+    plogradouro VARCHAR(45),
+    pnumero INT(11),
+    pcomplemento VARCHAR(30)
+    
+)
+BEGIN
+	DECLARE vid_endereco INT;
+	DECLARE vid_pessoa INT;
+	
+	INSERT tb_endereco (logradouro, cidade, estado, cep, numero, complemento, bairro)
+	VALUES (plogradouro, pcidade, pestado, pcep, pnumero, pcomplemento, pbairro);
+	
+	SET vid_endereco = LAST_INSERT_ID();
+	
+	INSERT tb_pessoa (nomePessoa, email, telefone, id_endereco)
+	VALUES (pnomePessoa, pemail, ptelefone, vid_endereco);
+	
+	SET vid_pessoa = LAST_INSERT_ID();
+	
+	INSERT tb_funcionario (cpf, rg, sexo, dtNascimento, login, senha, id_pessoa)
+	VALUES (pcpf, prg, psexo, pdtNascimento, plogin, psenha, vid_pessoa);
+	
+	SELECT * FROM tb_endereco e INNER JOIN tb_pessoa p USING(id_endereco)
+    INNER JOIN tb_funcionario f USING(id_pessoa) WHERE f.matricula_funcionario = LAST_INSERT_ID();
+	
+END$$
+
+DELIMITER ;

@@ -7,6 +7,7 @@
 	use \Slim\Slim;
 	use \Acrilbox\Page;
 	use \Acrilbox\Model\User;
+	use \Acrilbox\Model\Employee;
 
 	$app = new Slim();
 
@@ -61,16 +62,16 @@
 	});
 
 
-	/*
-	 *Editar Funcionario
-	 */
+	/**************************************************************************
+	 *Editar Funcionario ------------------------------------------------------
+	 **************************************************************************/
 	$app->get('/Funcionario', function()
 	{
 		User::verifyLogin();
 		
 		$page = new Page();
 
-		$page->setTpl("Funcionario");
+		$page->setTpl("employee");
 	});
 
 	$app->get('/Funcionario/CadastroFuncionario', function()
@@ -79,7 +80,40 @@
 		
 		$page = new Page();
 
-		$page->setTpl("CadastroFuncionario");
+		$page->setTpl("employee-create");
+	});
+
+	$app->post('/Funcionario/CadastroFuncionario', function()
+	{
+		User::verifyLogin();
+		
+		$employed = new Employee();
+
+		$_POST['login'] = $employed->generateLogin($_POST['nomePessoa']);
+
+		$_POST['senha'] = $employed->defaultPassword();
+
+		$_POST['sexo'] = $_POST['sexo'] === "Masculino" ? 'M':'F';
+
+		$_POST['dtNascimento'] = implode("-",array_reverse(explode("/",$_POST['dtNascimento'])));
+		
+		$employed->setData($_POST);
+
+		$employed->save();
+
+		header("Location: /Funcionario");
+		exit;
+
+	});
+
+	$app->get('/Funcionario/update', function() 
+	{
+		User::verifyLogin();
+		
+		$page = new Page();
+
+		$page->setTpl("employee-update");
+
 	});
 
 
@@ -92,7 +126,7 @@
 		
 		$page = new Page();
 
-		$page->setTpl("Cliente");
+		$page->setTpl("client");
 	});
 
 
@@ -105,7 +139,7 @@
 		
 		$page = new Page();
 
-		$page->setTpl("Servico");
+		$page->setTpl("service"); // Arquivo ainda não foi criado
 	});
 
 
@@ -118,7 +152,7 @@
 		
 		$page = new Page();
 
-		$page->setTpl("Fornecedor");
+		$page->setTpl("supplier");
 	});
 	/*
 	 * Editar Produtos 
@@ -129,7 +163,7 @@
 		
 		$page = new Page();
 
-		$page->setTpl("Produto");
+		$page->setTpl("product");
 	});
 
 	$app->get('/Produto/CadastroProduto', function() 
@@ -138,7 +172,7 @@
 
 		$page = new Page();
 
-		$page->setTpl("CadastroProduto");
+		$page->setTpl("product-create");
 	});
 
 
