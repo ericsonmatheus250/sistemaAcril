@@ -23,16 +23,13 @@ CREATE TABLE IF NOT EXISTS tb_endereco (
   id_endereco INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   logradouro VARCHAR(45) NOT NULL,
   cidade VARCHAR(45) NOT NULL,
-  estado VARCHAR(2) NOT NULL,
+  uf VARCHAR(2) NOT NULL,
   cep VARCHAR(9) NOT NULL,
   numero INT NOT NULL,
+  bairro VARCHAR(45) NOT NULL,
   complemento VARCHAR(30) NULL
 );
 
--- Insert de dados para teste
-
-insert into tb_endereco (logradouro, cidade, estado, cep, numero, complemento) values ('Qr 601','Samambaia','DF','72331-000',15,'');
-insert into tb_endereco (logradouro, cidade, estado, cep, numero, complemento) values ('Qr 207 Conjunto 04','Samambaia','DF','72331-000',07,'');
 
 -- -----------------------------------------------------
 -- Table tb_pessoa
@@ -43,42 +40,34 @@ CREATE TABLE IF NOT EXISTS tb_pessoa (
   id_pessoa INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   nomePessoa VARCHAR(45) NOT NULL,
   email VARCHAR(45) NULL,
-  telefone VARCHAR(11) NOT NULL,
-  id_endereco INT NOT NULL,
+  telefone VARCHAR(16),
+  id_endereco INT,
   FOREIGN KEY (id_endereco) REFERENCES tb_endereco (id_endereco)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_pessoa (nomePessoa, email, telefone, id_endereco) values ('Ericson Gonçalves','ericson.goncalves@gmail.com','(61)9 9999-9999',1);
-insert into tb_pessoa (nomePessoa, email, telefone, id_endereco) values ('Matheus de Souza','matheus.souza@hotmail.com','(61)0 0000-0000',2);
-insert into tb_pessoa (nomePessoa, email, telefone, id_endereco) values ('Construtora LTDA','construtora@gmail.com','(61)8 8888-8888',2);
-
+insert into tb_pessoa (nomePessoa, email) VALUES("Administrador", "admin@admin.com");
 -- -----------------------------------------------------
 -- Table tb_funcionario
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS tb_funcionario ;
 
 CREATE TABLE IF NOT EXISTS tb_funcionario (
-  matricula_funcionario INT NOT NULL PRIMARY KEY,
-  cpf VARCHAR(11) UNIQUE NOT NULL,
-  rg VARCHAR(12) UNIQUE NOT NULL,
-  sexo ENUM('M', 'F') NOT NULL,
-  dtNascimento DATE NOT NULL,
-  login VARCHAR(20) NOT NULL,
+  matricula_funcionario INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  cpf VARCHAR(14) UNIQUE,
+  rg VARCHAR(14) UNIQUE,
+  sexo ENUM('M', 'F'),
+  dtNascimento DATE,
+  login VARCHAR(26) NOT NULL,
   senha VARCHAR(256) NOT NULL,
-  id_pessoa INT NOT NULL,
+  id_pessoa INT,
   FOREIGN KEY (id_pessoa) REFERENCES tb_pessoa (id_pessoa)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_funcionario (matricula_funcionario, cpf, rg, sexo, dtNascimento, login, senha, id_pessoa) values ('1112','999.999.999-99','99999999999', 'M', 1998-11-10, 'admin', '$2y$12$YlooCyNvyTji8bPRcrfNfOKnVMmZA9ViM2A3IpFjmrpIbp5ovNmga',2);
-
+insert into tb_funcionario (login, senha, id_pessoa) VALUES ("admin", "$2y$12$88TlBQ.H5kc5MmE.OfSBIuXK6wsHeGotquOLJCxjhUCpwGh4BYY96", 1);
 -- -----------------------------------------------------
 -- Table tb_fornecedor
 -- -----------------------------------------------------
@@ -92,10 +81,6 @@ CREATE TABLE IF NOT EXISTS tb_fornecedor (
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_fornecedor (id_pessoa) values (3);
-insert into tb_fornecedor (id_pessoa) values (1);
 
 -- -----------------------------------------------------
 -- Table tb_fornecedorJuridico
@@ -111,9 +96,6 @@ CREATE TABLE IF NOT EXISTS tb_fornecedorJuridico (
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_fornecedorJuridico (cnpj, id_fornecedor) values ('123456789121231', 1);
 
 -- -----------------------------------------------------
 -- Table tb_fornecedorFisico
@@ -122,16 +104,13 @@ DROP TABLE IF EXISTS tb_fornecedorFisico ;
 
 CREATE TABLE IF NOT EXISTS tb_fornecedorFisico (
   id_fornecedorFisico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  cpf VARCHAR(11) UNIQUE NOT NULL,
+  cpf VARCHAR(14) UNIQUE NOT NULL,
   id_fornecedor INT NOT NULL,
   FOREIGN KEY (id_fornecedor) REFERENCES tb_fornecedor (id_fornecedor)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_fornecedorFisico (cpf, id_fornecedor) values ('12345678912', 2);
 
 -- -----------------------------------------------------
 -- Table tb_cliente
@@ -148,10 +127,6 @@ CREATE TABLE IF NOT EXISTS tb_cliente (
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_cliente (saldo_positivo, saldo_negativo, id_pessoa) values (0.0, 0.0, 2);
-insert into tb_cliente (saldo_positivo, saldo_negativo, id_pessoa) values (0.0, 0.0, 3);
 
 -- -----------------------------------------------------
 -- Table tb_clienteFisico
@@ -160,16 +135,13 @@ DROP TABLE IF EXISTS tb_clienteFisico ;
 
 CREATE TABLE IF NOT EXISTS tb_clienteFisico (
   id_clienteFisico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  cpf VARCHAR(11) UNIQUE NOT NULL,
+  cpf VARCHAR(14) UNIQUE NOT NULL,
   id_cliente INT NOT NULL,
   FOREIGN KEY (id_cliente) REFERENCES tb_cliente (id_cliente)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_clienteFisico (cpf, id_cliente) values ('12345678512', 1);
 
 -- -----------------------------------------------------
 -- Table tb_clienteJuridico
@@ -185,9 +157,6 @@ CREATE TABLE IF NOT EXISTS tb_clienteJuridico (
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_clienteJuridico (cnpj, id_cliente) values ('123456781254852', 2);
 
 -- -----------------------------------------------------
 -- Table tb_servico
@@ -221,10 +190,6 @@ CREATE TABLE IF NOT EXISTS tb_venda (
   FOREIGN KEY (id_cliente) REFERENCES tb_cliente (id_cliente)
 );
 
--- Insert de dados para teste
-
-insert into tb_venda (dataVenda, precoVenda, desconto, valorTotal, id_funcionario, id_cliente) values (now(), 50.0, 2.0, 48.0, 1112, 1);
-
 -- -----------------------------------------------------
 -- Table tb_compra
 -- -----------------------------------------------------
@@ -240,28 +205,18 @@ CREATE TABLE IF NOT EXISTS tb_compra (
   CONSTRAINT id_fornecedor FOREIGN KEY (id_fornecedor) REFERENCES tb_fornecedor (id_fornecedor)
 );
 
--- Insert de dados para teste
-
-insert into tb_compra (dataCompra, valorCompra, id_funcionario, id_fornecedor) values (now(), 50.0, 1112, 1);
-
 -- -----------------------------------------------------
 -- Table tb_produto
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS tb_produto ;
 
 CREATE TABLE IF NOT EXISTS tb_produto (
-  cod_produto INT NOT NULL PRIMARY KEY,
+  cod_produto INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nomeProduto VARCHAR(45) NOT NULL,
   codigoBarra VARCHAR(45) NOT NULL,
   corProduto VARCHAR(45) NOT NULL,
   notaFiscal VARCHAR(45) NULL
   );
-
--- Insert de dados para teste
-
-insert into tb_produto (cod_produto, nomeProduto, codigoBarra, corProduto, notaFiscal) values (1515, 'Acessorio Veda Poeira', '0100101100011', 'fosco', '');
-insert into tb_produto (cod_produto, nomeProduto, codigoBarra, corProduto, notaFiscal) values (1545, 'janela 4 folhas', '01001101100011', 'fumê', '');
-insert into tb_produto (cod_produto, nomeProduto, codigoBarra, corProduto, notaFiscal) values (1535, 'perfil', '01111101100011', 'cinza', '');
 
 -- -----------------------------------------------------
 -- Table tb_itemVendido
@@ -282,9 +237,6 @@ CREATE TABLE IF NOT EXISTS tb_itemVendido (
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_itemVendido (precoVenda, quantidadeVenda, id_venda, cod_produto) values (50.0, 1, 1, 1515);
 
 -- -----------------------------------------------------
 -- Table tb_itemComprado
@@ -305,9 +257,6 @@ CREATE TABLE IF NOT EXISTS tb_itemComprado (
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_itemComprado (precoCompra, quantidade, id_compra, cod_produto) values (50.0, 1, 1, 1515);
 
 -- -----------------------------------------------------
 -- Table tb_estoque
@@ -326,11 +275,6 @@ CREATE TABLE IF NOT EXISTS tb_estoque (
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, qtdReal) values (1515, 15, 50, 45, 45);
-insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, qtdReal) values (1545, 15, 50, 45, 45);
-insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, qtdReal) values (1535, 15, 50, 45, 45);
 
 -- -----------------------------------------------------
 -- Table tb_acessorio
@@ -338,7 +282,7 @@ insert into tb_estoque (cod_produto, qtdMinima, qtdMaxima, qtdAtual_Disponivel, 
 DROP TABLE IF EXISTS tb_acessorio ;
 
 CREATE TABLE IF NOT EXISTS tb_acessorio (
-  id_acessorio INT NOT NULL PRIMARY KEY,
+  id_acessorio INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   tipo VARCHAR(45) NOT NULL,
   cod_produto INT NOT NULL,
   FOREIGN KEY (cod_produto) REFERENCES tb_produto (cod_produto)
@@ -346,9 +290,6 @@ CREATE TABLE IF NOT EXISTS tb_acessorio (
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_acessorio (id_acessorio, tipo, cod_produto) values (15321, 'veda poeira', 1515);
 
 -- -----------------------------------------------------
 -- Table tb_vidro
@@ -356,7 +297,7 @@ insert into tb_acessorio (id_acessorio, tipo, cod_produto) values (15321, 'veda 
 DROP TABLE IF EXISTS tb_vidro ;
 
 CREATE TABLE IF NOT EXISTS tb_vidro (
-  id_vidro INT NOT NULL PRIMARY KEY,
+  id_vidro INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   largura DOUBLE NOT NULL,
   altura DOUBLE NOT NULL,
   espessura DOUBLE NOT NULL,
@@ -367,9 +308,6 @@ CREATE TABLE IF NOT EXISTS tb_vidro (
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
-
-insert into tb_vidro (id_vidro, largura, altura, espessura, tipo, cod_produto) values (3251, 2.0, 1.0, 8, 'janela', 1545);
 
 -- -----------------------------------------------------
 -- Table tb_aluminio
@@ -377,7 +315,7 @@ insert into tb_vidro (id_vidro, largura, altura, espessura, tipo, cod_produto) v
 DROP TABLE IF EXISTS tb_aluminio ;
 
 CREATE TABLE IF NOT EXISTS tb_aluminio (
-  id_aluminio INT NOT NULL PRIMARY KEY,
+  id_aluminio INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   tipo VARCHAR(45) NULL,
   cod_produto INT NOT NULL,
   FOREIGN KEY (cod_produto) REFERENCES tb_produto (cod_produto)
@@ -385,7 +323,88 @@ CREATE TABLE IF NOT EXISTS tb_aluminio (
     ON UPDATE NO ACTION
 );
 
--- Insert de dados para teste
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_employee_save`;
 
-insert into tb_aluminio (id_aluminio, tipo, cod_produto) values (32545, 'perfil', 1535);
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_employee_save`;
+
+DELIMITER $$
+USE `db_acrilbox`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_employee_save`(
+	pnomePessoa VARCHAR(45),
+    pemail VARCHAR(45),
+    ptelefone VARCHAR(16),
+    pcpf VARCHAR(14),
+    prg VARCHAR(12),
+    psexo ENUM('M','F'),
+    pdtNascimento DATE,
+	plogin VARCHAR(20),
+	psenha VARCHAR(250),
+    pcep VARCHAR(9),
+    puf VARCHAR(2),
+    pcidade VARCHAR(45),
+    pbairro VARCHAR(45),
+    plogradouro VARCHAR(45),
+    pnumero INT(11),
+    pcomplemento VARCHAR(30)
+    
+)
+BEGIN
+	DECLARE vid_endereco INT;
+	DECLARE vid_pessoa INT;
+	
+	INSERT tb_endereco (logradouro, cidade, uf, cep, numero, complemento, bairro)
+	VALUES (plogradouro, pcidade, puf, pcep, pnumero, pcomplemento, pbairro);
+	
+	SET vid_endereco = LAST_INSERT_ID();
+	
+	INSERT tb_pessoa (nomePessoa, email, telefone, id_endereco)
+	VALUES (pnomePessoa, pemail, ptelefone, vid_endereco);
+	
+	SET vid_pessoa = LAST_INSERT_ID();
+	
+	INSERT tb_funcionario (cpf, rg, sexo, dtNascimento, login, senha, id_pessoa)
+	VALUES (pcpf, prg, psexo, pdtNascimento, plogin, psenha, vid_pessoa);
+	
+	SELECT * FROM tb_endereco e INNER JOIN tb_pessoa p USING(id_endereco)
+    INNER JOIN tb_funcionario f USING(id_pessoa) WHERE f.matricula_funcionario = LAST_INSERT_ID();
+	
+END$$
+
+DELIMITER ;
+
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_employee_delete`;
+
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_employee_delete`;
+
+DELIMITER $$
+USE `db_acrilbox`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_employee_delete`(
+	pmatricula_funcionario INT
+)
+BEGIN
+	DECLARE vid_pessoa INT;
+	DECLARE vid_endereco INT;
+	
+	SELECT id_pessoa INTO vid_pessoa
+	FROM tb_funcionario
+	WHERE matricula_funcionario = pmatricula_funcionario;
+	
+	SELECT id_endereco INTO vid_endereco
+	FROM tb_pessoa
+	WHERE id_endereco = vid_endereco;
+	
+	DELETE FROM tb_funcionario WHERE matricula_funcionario = pmatricula_funcionario;
+	DELETE FROM tb_pessoa WHERE id_pessoa = vid_pessoa;
+    DELETE FROM tb_endereco WHERE id_endereco = vid_endereco;
+    
+
+END$$
+
+DELIMITER ;
+
+
 

@@ -13,7 +13,7 @@
 		{
 			$sql = new Sql();
 		
-			$results = $sql->select("SELECT * FROM tb_funcionario WHERE login = :LOGIN", array (
+			$results = $sql->select("SELECT * FROM tb_funcionario f INNER JOIN tb_pessoa p USING(id_pessoa) WHERE login = :LOGIN", array (
 				":LOGIN" => $login 
 			));
 
@@ -57,6 +57,14 @@
 		public static function logout() 
 		{
 			$_SESSION[User::SESSION] = NULL;
+		}
+
+		public static function showName()
+		{
+
+			$fullName = explode(" ",$_SESSION[User::SESSION]['nomePessoa']);
+
+			return $fullName[0];
 		}
 	}
 

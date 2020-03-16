@@ -37,6 +37,7 @@ class ComposerStaticInit17755c7f96ab2f41634b1eb210cfc3c1
         ),
     );
 
+<<<<<<< HEAD
     public static $classMap = array (
         'EasyPeasyICS' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
         'PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
@@ -48,13 +49,14 @@ class ComposerStaticInit17755c7f96ab2f41634b1eb210cfc3c1
         'phpmailerException' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
     );
 
+=======
+>>>>>>> f8645b21878bc53ce1212a43f8a14ab6415cc964
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit17755c7f96ab2f41634b1eb210cfc3c1::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit17755c7f96ab2f41634b1eb210cfc3c1::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit17755c7f96ab2f41634b1eb210cfc3c1::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit17755c7f96ab2f41634b1eb210cfc3c1::$classMap;
 
         }, null, ClassLoader::class);
     }

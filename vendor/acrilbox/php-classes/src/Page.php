@@ -3,6 +3,7 @@
 	namespace Acrilbox;
 
 	use Rain\Tpl;
+	use \Acrilbox\Model\User;
 
 	class Page 
 	{
@@ -29,8 +30,10 @@
 			$this->tpl = new Tpl;
 
 			$this->setData($this->options["data"]);
-
-			if($this->options["header"] === true) $this->tpl->draw("header");
+			
+			if($this->options["header"] === true) $this->setTpl("header", [
+				"value" => User::showName()
+			]);
 		}
 
 		public function setData($data = array())
