@@ -61,7 +61,6 @@
 
 		public static function showName()
 		{
-
 			$fullName = explode(" ",$_SESSION[User::SESSION]['nomePessoa']);
 
 			return $fullName[0];
