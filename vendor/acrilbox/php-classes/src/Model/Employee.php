@@ -8,6 +8,8 @@ const PASSWORD = 123456;
 
 class Employee extends Model
 {
+    const SESSION = "User";
+
     public static function listAll() 
     {
         $sql = new Sql();
@@ -86,13 +88,44 @@ class Employee extends Model
         $sql->query("CALL sp_employee_delete(:matricula_funcionario)", [
             ':matricula_funcionario' => $this->getmatricula_funcionario()
         ]);
+
+        if($_SESSION[User::SESSION]['matricula_funcionario'] === $this->getmatricula_funcionario())
+        {
+            $_SESSION[User::SESSION] = NULL;
+        }
         
     }
 
-    public static function getUser()
+    public function update() 
     {
+        $sql = new Sql();
+
+        $results = $sql->select("CALL sp_employee_update(:matricula_funcionario, :pnomePessoa, :pemail, :ptelefone, :pcpf, :prg, 
+        :psexo, :pdtNascimento, :plogin, :psenha, :pcep, :puf, :pcidade, :pbairro,
+        :plogradouro, :pnumero, :pcomplemento)", array(
+            ":matricula_funcionario" => $this->getmatricula_funcionario(),
+            ":pnomePessoa" => $this->getnomePessoa(),
+            ":pemail" => $this->getemail(),
+            ":ptelefone" => $this->gettelefone(),
+            ":pcpf" => $this->getcpf(),
+            ":prg" => $this->getrg(),
+            ":psexo" => $this->getsexo(),
+            ":pdtNascimento" => $this->getdtNascimento(),
+            ":plogin" => $this->getlogin(),
+            ":psenha" => $this->getsenha(),
+            ":pcep" => $this->getcep(),
+            ":puf" => $this->getuf(),
+            ":pcidade" => $this->getcidade(),
+            ":pbairro" => $this->getbairro(),
+            ":plogradouro" => $this->getlogradouro(),
+            ":pnumero" => $this->getnumero(),
+            ":pcomplemento" => $this->getcomplemento()
+        ));
         
+        $this->setData($results[0]);
+
     }
+
 }
 
 

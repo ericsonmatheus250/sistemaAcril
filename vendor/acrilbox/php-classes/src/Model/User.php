@@ -42,6 +42,7 @@
 
 		public static function verifyLogin() 
 		{
+
 			if(
 				!isset($_SESSION[User::SESSION]) //Se a sessão não existir
 				||

@@ -1,5 +1,5 @@
         <h2 class="mb-4">Funcionário</h2>
-        <form action="/Funcionario/CadastroFuncionario" method="POST" >
+        <form action="/Funcionario/{$employee.matricula_funcionario}" method="POST" >
             <div class="form-group">
                 <label for="nome">Nome<i class="importante">*</i></label>
                 <input type="text" class="form-control" id="nome" name="nomePessoa" value="{$employee.nomePessoa}">
@@ -21,10 +21,8 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="sexo">Sexo</label>
-                    <select id="sexo" name="sexo" class="form-control" value="{$employee.sexo}">
-                        <option selected>Selecione</option>
-                        <option>Masculino</option>
-                        <option>Feminino</option>
+                    <select id="sexo" name="sexo" class="form-control">
+                        {if="$employee.sexo == 'M'"}<option selected>Masculino</option><option>Feminino</option>{else}<option selected>Feminino</option><option>Masculino</option>{/if}
                     </select>
                 </div>
                 <div class="form-group col-md-4">

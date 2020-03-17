@@ -1,5 +1,5 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?>        <h2 class="mb-4">Funcionário</h2>
-        <form action="/Funcionario/CadastroFuncionario" method="POST" >
+        <form action="/Funcionario/<?php echo htmlspecialchars( $employee["matricula_funcionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="POST" >
             <div class="form-group">
                 <label for="nome">Nome<i class="importante">*</i></label>
                 <input type="text" class="form-control" id="nome" name="nomePessoa" value="<?php echo htmlspecialchars( $employee["nomePessoa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
@@ -21,10 +21,8 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="sexo">Sexo</label>
-                    <select id="sexo" name="sexo" class="form-control" value="<?php echo htmlspecialchars( $employee["sexo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                        <option selected>Selecione</option>
-                        <option>Masculino</option>
-                        <option>Feminino</option>
+                    <select id="sexo" name="sexo" class="form-control">
+                        <?php if( $employee["sexo"] == 'M' ){ ?><option selected>Masculino</option><option>Feminino</option><?php }else{ ?><option selected>Feminino</option><option>Masculino</option><?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-md-4">

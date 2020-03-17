@@ -109,6 +109,7 @@
 		exit;
 
 	});
+
 	$app->get('/Funcionario/:matricula_funcionario/delete', function($matricula_funcionario) 
 	{
 		User::verifyLogin();
@@ -140,19 +141,22 @@
 
 	});
 
-	$app->post('/Funcionario/:matricula_funcionario', function($matricula_funcionario) 
+	$app->post('/Funcionario/:matricula_funcionario', function($matricula_funcionario)
 	{
 		User::verifyLogin();
-	
+		
 		$employee = new Employee();
 
-		$employee->get((int) $matricula_funcionario);
+		$employee->get((int)$matricula_funcionario);
 
+		$_POST['dtNascimento'] = implode("-",array_reverse(explode("/",$_POST['dtNascimento'])));
+		
 		$employee->setData($_POST);
 
-		$employee->save();
+		$employee->update();
 
 		header("Location: /Funcionario");
+		exit;
 
 	});
 

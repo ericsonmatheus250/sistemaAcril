@@ -1,4 +1,4 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?>            <h2 class="mb-4">Bem vindo, Vitor Abreu! </h2>
+<?php if(!class_exists('Rain\Tpl')){exit;}?>            <h2 class="mb-4">Bem vindo, <?php echo htmlspecialchars( $value, ENT_COMPAT, 'UTF-8', FALSE ); ?>! </h2>
             <div class="box box-light">
                 <div class="box-body">
                     <h3 class="txt text-secondary"><i class="fas fa-chart-bar"></i> Ultimos Orçamentos</h3>

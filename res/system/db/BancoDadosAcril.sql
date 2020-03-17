@@ -323,6 +323,8 @@ CREATE TABLE IF NOT EXISTS tb_aluminio (
     ON UPDATE NO ACTION
 );
 
+
+/********PROCEDURE DE CADASTRAR O FUNCIONARIO********/
 USE `db_acrilbox`;
 DROP procedure IF EXISTS `sp_employee_save`;
 
@@ -374,6 +376,8 @@ END$$
 
 DELIMITER ;
 
+
+/********PROCEDURE DE DELETAR O FUNCIONARIO********/
 USE `db_acrilbox`;
 DROP procedure IF EXISTS `sp_employee_delete`;
 
@@ -405,6 +409,80 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+
+/********PROCEDURE DE ATUALIZAR O FUNCIONARIO********/
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_employee_update`;
+
+DELIMITER $$
+USE `db_acrilbox`$$
+CREATE PROCEDURE `sp_employee_update` (
+	pmatricula_funcionario INT,
+	pnomePessoa VARCHAR(45),
+    pemail VARCHAR(45),
+    ptelefone VARCHAR(16),
+    pcpf VARCHAR(14),
+    prg VARCHAR(12),
+    psexo ENUM('M','F'),
+    pdtNascimento DATE,
+	plogin VARCHAR(20),
+	psenha VARCHAR(250),
+    pcep VARCHAR(9),
+    puf VARCHAR(2),
+    pcidade VARCHAR(45),
+    pbairro VARCHAR(45),
+    plogradouro VARCHAR(45),
+    pnumero INT(11),
+    pcomplemento VARCHAR(30)
+)
+BEGIN
+	DECLARE vid_pessoa INT;
+	DECLARE vid_endereco INT;
+	
+	SELECT id_pessoa INTO vid_pessoa
+	FROM tb_funcionario
+	WHERE matricula_funcionario = pmatricula_funcionario;
+	
+	SELECT id_endereco INTO vid_endereco
+	FROM tb_pessoa
+	WHERE id_pessoa = vid_pessoa;
+	
+	UPDATE tb_endereco
+	SET 
+		cep = pcep,
+		uf = puf,
+		cidade = pcidade,
+		bairro = pbairro,
+		logradouro = plogradouro,
+		numero = pnumero,
+		complemento = pcomplemento
+	WHERE id_endereco = vid_endereco;
+	
+	UPDATE tb_pessoa
+	SET 
+		nomePessoa = pnomePessoa,
+		email = pemail,
+		telefone = ptelefone
+	WHERE id_pessoa = vid_pessoa;
+	
+	UPDATE tb_funcionario
+	SET 
+		cpf = pcpf,
+		rg = prg,
+		sexo = psexo,
+		dtNascimento = pdtNascimento,
+		login = plogin,
+		senha = psenha
+	WHERE id_pessoa = vid_pessoa;
+
+	SELECT * FROM tb_endereco e INNER JOIN tb_pessoa p USING(id_endereco)
+    INNER JOIN tb_funcionario f USING(id_pessoa) WHERE f.matricula_funcionario = pmatricula_funcionario;
+	
+END$$
+
+DELIMITER ;
+
 
 
 
