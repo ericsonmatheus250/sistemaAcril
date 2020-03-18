@@ -60,6 +60,14 @@
 			$_SESSION[User::SESSION] = NULL;
 		}
 
+		public static function showName() 
+		{
+			$fullName = $_SESSION[User::SESSION]["nomePessoa"];
+
+			$firstName = explode(" ", $fullName);
+
+			return $firstName[0];
+		}
 	}
 
  ?>

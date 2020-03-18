@@ -47,10 +47,10 @@
 
 		$page = new Page();
 
-		$page->setTpl("index");
+		$page->setTpl("index", [
+			"value" => User::showName()
+		]);
 
-		var_dump($_SESSION["User"]);
-		exit;
 	});
 
 
@@ -90,6 +90,7 @@
 		$page = new Page();
 
 		$page->setTpl("employee-create");
+
 	});
 
 	$app->post('/Funcionario/CadastroFuncionario', function()
@@ -205,6 +206,8 @@
 
 		$page->setTpl("supplier");
 	});
+
+
 	/*
 	 * Editar Produtos 
 	 */
@@ -225,13 +228,17 @@
 
 		$page->setTpl("product-create");
 	});
+
+	/*
+	 * Fazer Pedido
+	 */
 	$app->get('/NovoOrcamento', function()
 	{
 		User::verifyLogin();
 		
 		$page = new Page();
 
-		$page->setTpl("orcamento");
+		$page->setTpl("budget");
 	});
 
 
