@@ -29,7 +29,7 @@
 				$user = new User();
 
 				$user->setData($data);
-
+				
 				$_SESSION[User::SESSION] = $user->getValue();
 
 				return $user;
@@ -60,12 +60,6 @@
 			$_SESSION[User::SESSION] = NULL;
 		}
 
-		public static function showName()
-		{
-			$fullName = explode(" ",$_SESSION[User::SESSION]['nomePessoa']);
-
-			return $fullName[0];
-		}
 	}
 
  ?>

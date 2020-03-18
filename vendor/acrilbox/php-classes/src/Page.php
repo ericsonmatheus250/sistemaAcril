@@ -31,9 +31,7 @@
 
 			$this->setData($this->options["data"]);
 			
-			if($this->options["header"] === true) $this->setTpl("header", [
-				"value" => User::showName()
-			]);
+			if($this->options["header"] === true) $this->setTpl("header"); 
 		}
 
 		public function setData($data = array())

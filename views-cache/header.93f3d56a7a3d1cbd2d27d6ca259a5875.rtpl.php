@@ -80,7 +80,7 @@
                                 <a href="#">Serviços</a>
                             </li>
                             <li>
-                                <a href="/res/system/_vendas/CriarOrcament.html">Vidros</a>
+                                <a href="/NovoOrcamento">Vidros</a>
                             </li>
                         </ul>
                     </li>
@@ -285,7 +285,7 @@
                     <li class="nav-item active usuario">
                         <div class="dropdown show">
                             <a class="nav nav-link dropdown" href="#" role="navigation" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-user-circle"></i>    <?php echo htmlspecialchars( $value, ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                                <i class="fas fa-user-circle"></i>    Vitor
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

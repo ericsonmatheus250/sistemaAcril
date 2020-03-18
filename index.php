@@ -11,6 +11,8 @@
 
 	$app = new Slim();
 
+	const SESSION = "User";
+	
 	$app->config('debug', true);
 
 	/*
@@ -22,7 +24,7 @@
 			"header" => false,
 			"footer" => false
 		]);
-
+				
 		$page->setTpl("login");
 	});
 
@@ -46,6 +48,9 @@
 		$page = new Page();
 
 		$page->setTpl("index");
+
+		var_dump($_SESSION["User"]);
+		exit;
 	});
 
 
@@ -148,6 +153,8 @@
 		$employee = new Employee();
 
 		$employee->get((int)$matricula_funcionario);
+		
+		$_POST['sexo'] = $_POST['sexo'] == 'Masculino' ? 'M':'F';
 
 		$_POST['dtNascimento'] = implode("-",array_reverse(explode("/",$_POST['dtNascimento'])));
 		
@@ -217,6 +224,14 @@
 		$page = new Page();
 
 		$page->setTpl("product-create");
+	});
+	$app->get('/NovoOrcamento', function()
+	{
+		User::verifyLogin();
+		
+		$page = new Page();
+
+		$page->setTpl("orcamento");
 	});
 
 
