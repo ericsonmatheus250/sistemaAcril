@@ -1,4 +1,5 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?>        <h2 class="mb-4"><i class="fas fa-address-card"></i> Funcionário</h2>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="container">
+<h2 class="mb-4"><i class="fas fa-address-card"></i> Funcionário</h2>
             <nav class="navbar navbar-expand-sm">
                 <div class="container-fluid">
                     <button type="submit" class="btn btn-primary"><a href="/Funcionario/CadastroFuncionario" style="color:green;">Adicionar</a></button>
@@ -47,4 +48,5 @@
                     <?php } ?>
                 </tbody>
             </table>
+        </div>
         </div>

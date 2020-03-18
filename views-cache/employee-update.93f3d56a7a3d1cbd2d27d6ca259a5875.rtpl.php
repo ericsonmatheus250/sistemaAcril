@@ -1,4 +1,5 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?>        <h2 class="mb-4">Funcionário</h2>
+<?php if(!class_exists('Rain\Tpl')){exit;}?>       <div class="container">
+       <h2 class="mb-4">Funcionário</h2>
         <form action="/Funcionario/<?php echo htmlspecialchars( $employee["matricula_funcionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="POST" >
             <div class="form-group">
                 <label for="nome">Nome<i class="importante">*</i></label>
@@ -91,5 +92,6 @@
             <button type="submit " class="btn btn-primary ">Cadastrar</button>
             <button type="submit " class="btn btn-danger " style="float: right; ">Cancelar</button>
         </form>
+    </div>
     </div>
 </div>

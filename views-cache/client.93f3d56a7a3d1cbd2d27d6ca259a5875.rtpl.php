@@ -1,4 +1,5 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><h2 class="mb-4"><i class="fas fa-address-book"></i> Cliente</h2>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="container">
+<h2 class="mb-4"><i class="fas fa-address-book"></i> Cliente</h2>
             <nav class="navbar navbar-expand-sm">
                 <div class="container-fluid">
                     <button type="submit" class="btn btn-primary"><a href="/_cadastro/CadastroCliente.html" style="color:green;">Adicionar</a></button>
@@ -57,5 +58,5 @@
                     </tr>
                 </tbody>
             </table>
-
-        </div>
+</div>
+ </div>
