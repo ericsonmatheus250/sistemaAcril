@@ -37,22 +37,7 @@
                 <label for="email">E-mail</label>
                 <input type="email" class="form-control" id="email" name="email">
             </div>
-            <div class="form-group">
-                <label for="setor">Setor<i class="importante">*</i></label>
-                <select id="setor" class="form-control" name="setor">
-                    <option value="Externo">Externo</option>
-                    <option value="Gerencia">Gerencia</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="funcao">Função<i class="importante">*</i></label>
-                <select id="funcao" class="form-control" name="nomeFuncao">
-                    <option>Sem Função</option>
-                    <option value="Gerente">Gerente</option>
-                    <option value="Entregador">Entregador</option>
-                </select>
-            </div>
-
+            
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="cep">CEP<i class="importante">*</i></label>
@@ -88,7 +73,7 @@
             </div>
             <div class="form-control-plaintext ">
                 <span style="color: #7c7c7c; ">Observações</span>
-                <textarea class="form-control valid " cols="30 " rows="6 "></textarea>
+                <textarea class="form-control valid" cols="30 " rows="6"></textarea>
             </div>
 
             <button type="submit " class="btn btn-primary ">Cadastrar</button>
