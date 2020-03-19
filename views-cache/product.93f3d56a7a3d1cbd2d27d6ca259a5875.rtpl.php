@@ -1,6 +1,11 @@
+<<<<<<< Updated upstream
 <?php if(!class_exists('Rain\Tpl')){exit;}?><div class="container">
 <h2 class="mb-4"><i class="fas fa-shopping-cart"></i> Produto</h2>
             
+=======
+<?php if(!class_exists('Rain\Tpl')){exit;}?><h2 class="mb-4"><i class="fas fa-shopping-cart"></i> Produto</h2>
+            <div class="container">
+>>>>>>> Stashed changes
 
                 <nav class="navbar navbar-expand-sm">
                     <div class="container-fluid">

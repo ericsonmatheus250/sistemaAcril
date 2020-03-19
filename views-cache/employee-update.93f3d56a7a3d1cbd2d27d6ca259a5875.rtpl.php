@@ -18,7 +18,7 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="telefone">Telefone<i class="importante">*</i></label>
-                    <input type="text" class="form-control" id="telefone" name="telefone" maxlength="14" OnKeyPress="formatar('(##) # ####-####', this)" value="<?php echo htmlspecialchars( $employee["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <input type="text" class="form-control" id="telefone" name="telefone" maxlength="14" OnKeyPress="formatar('## # ####-####', this)" value="<?php echo htmlspecialchars( $employee["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="sexo">Sexo</label>

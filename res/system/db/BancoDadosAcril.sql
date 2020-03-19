@@ -381,9 +381,6 @@ DELIMITER ;
 USE `db_acrilbox`;
 DROP procedure IF EXISTS `sp_employee_delete`;
 
-USE `db_acrilbox`;
-DROP procedure IF EXISTS `sp_employee_delete`;
-
 DELIMITER $$
 USE `db_acrilbox`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_employee_delete`(
@@ -399,7 +396,7 @@ BEGIN
 	
 	SELECT id_endereco INTO vid_endereco
 	FROM tb_pessoa
-	WHERE id_endereco = vid_endereco;
+	WHERE id_pessoa = vid_pessoa;
 	
 	DELETE FROM tb_funcionario WHERE matricula_funcionario = pmatricula_funcionario;
 	DELETE FROM tb_pessoa WHERE id_pessoa = vid_pessoa;
@@ -409,6 +406,7 @@ BEGIN
 END$$
 
 DELIMITER ;
+
 
 
 /********PROCEDURE DE ATUALIZAR O FUNCIONARIO********/
