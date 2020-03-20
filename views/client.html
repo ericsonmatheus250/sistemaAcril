@@ -2,7 +2,7 @@
 <h2 class="mb-4"><i class="fas fa-address-book"></i> Cliente</h2>
             <nav class="navbar navbar-expand-sm">
                 <div class="container-fluid">
-                    <button type="submit" class="btn btn-primary"><a href="/_cadastro/CadastroCliente.html" style="color:green;">Adicionar</a></button>
+                    <button type="submit" class="btn btn-primary"><a href="/Cliente/CadastroCliente" style="color:green;">Adicionar</a></button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
