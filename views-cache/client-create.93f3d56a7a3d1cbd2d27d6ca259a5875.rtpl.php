@@ -1,4 +1,4 @@
-           <div class="container">
+<?php if(!class_exists('Rain\Tpl')){exit;}?>           <div class="container">
             <h2 class="mb-4">Cliente</h2>
             <form action="/Cliente/CadastroCliete" method="POST">
                 <div class="form-group">

@@ -1,7 +1,8 @@
 <?php 
 
 namespace Acrilbox\Model;
-use \Acrilbox\DataBase\Sql;
+
+use \Acrilbox\Database\Sql;
 use \Acrilbox\Model;
 
 const PASSWORD = 123456;

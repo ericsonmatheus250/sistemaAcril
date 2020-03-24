@@ -27,36 +27,26 @@
                         <th scope="col">Nome</th>
                         <th scope="col">E-mail</th>
                         <th scope="col">Número</th>
-                        <th scope="col">Estado</th>
+                        <th scope="col">Tipo Cliente</th>
                         <th scope="colgroup">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $counter1=-1;  if( isset($clients) && ( is_array($clients) || $clients instanceof Traversable ) && sizeof($clients) ) foreach( $clients as $key1 => $value1 ){ $counter1++; ?>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>vitor santos</td>
-                        <td>@gmail</td>
-                        <td>(61)9 9996-3966</td>
-                        <td>ativo</td>
+                        <th scope="row"><?php echo htmlspecialchars( $value1["id_cliente"], ENT_COMPAT, 'UTF-8', FALSE ); ?></th>
+                        <td><?php echo htmlspecialchars( $value1["nomePessoa"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                        <td><?php echo htmlspecialchars( $value1["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                        <td><?php echo htmlspecialchars( $value1["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                        <td><?php echo htmlspecialchars( $value1["tipo_cliente"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                         <td>
                             <a class="btn btn-outline-success" title="visualizar"><i class="fas fa-search"></i></a>
-                            <a href="#" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
-                            <a href="#" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
+                            <a href="/Cliente/<?php echo htmlspecialchars( $value1["id_cliente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
+                            <a href="/Cliente/<?php echo htmlspecialchars( $value1["id_cliente"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onClick="return confirm('Deseja realmente apagar este cliente?')" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Ericson</td>
-                        <td>@hotmail</td>
-                        <td>(61)0 0000-0000</td>
-                        <td>desativado</td>
-                        <td>
-                            <a class="btn btn-outline-success" title="visualizar"><i class="fas fa-search"></i></a>
-                            <a href="#" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
-                            <a href="#" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
-                        </td>
-                    </tr>
+                    <?php } ?>
                 </tbody>
             </table>
+    </div>
 </div>
- </div>

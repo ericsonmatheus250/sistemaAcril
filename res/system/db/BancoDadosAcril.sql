@@ -75,38 +75,10 @@ DROP TABLE IF EXISTS tb_fornecedor ;
 
 CREATE TABLE IF NOT EXISTS tb_fornecedor (
   id_fornecedor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  cpf_cnpj VARCHAR(20) UNIQUE NOT NULL,
+  tipo_fornecedor ENUM('Fisico', 'Juridico'),
   id_pessoa INT NOT NULL,
   FOREIGN KEY (id_pessoa) REFERENCES tb_pessoa (id_pessoa)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-);
-
-
--- -----------------------------------------------------
--- Table tb_fornecedorJuridico
--- -----------------------------------------------------
-DROP TABLE IF EXISTS tb_fornecedorJuridico ;
-
-CREATE TABLE IF NOT EXISTS tb_fornecedorJuridico (
-  id_fornecedorJuridico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  cnpj VARCHAR(20) UNIQUE NOT NULL,
-  id_fornecedor INT NOT NULL,
-  FOREIGN KEY (id_fornecedor) REFERENCES tb_fornecedor (id_fornecedor)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-);
-
-
--- -----------------------------------------------------
--- Table tb_fornecedorFisico
--- -----------------------------------------------------
-DROP TABLE IF EXISTS tb_fornecedorFisico ;
-
-CREATE TABLE IF NOT EXISTS tb_fornecedorFisico (
-  id_fornecedorFisico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  cpf VARCHAR(14) UNIQUE NOT NULL,
-  id_fornecedor INT NOT NULL,
-  FOREIGN KEY (id_fornecedor) REFERENCES tb_fornecedor (id_fornecedor)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
@@ -119,40 +91,13 @@ DROP TABLE IF EXISTS tb_cliente ;
 
 CREATE TABLE IF NOT EXISTS tb_cliente (
   id_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  cpf_cnpj VARCHAR(20) UNIQUE NOT NULL,
   saldo_positivo DOUBLE NULL,
   saldo_negativo DOUBLE NULL,
+  limite_credito DOUBLE NULL,
+  tipo_cliente ENUM('Fisico', 'Juridico'),
   id_pessoa INT NOT NULL,
   FOREIGN KEY (id_pessoa) REFERENCES tb_pessoa (id_pessoa)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-);
-
-
--- -----------------------------------------------------
--- Table tb_clienteFisico
--- -----------------------------------------------------
-DROP TABLE IF EXISTS tb_clienteFisico ;
-
-CREATE TABLE IF NOT EXISTS tb_clienteFisico (
-  id_clienteFisico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  cpf VARCHAR(14) UNIQUE NOT NULL,
-  id_cliente INT NOT NULL,
-  FOREIGN KEY (id_cliente) REFERENCES tb_cliente (id_cliente)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-);
-
-
--- -----------------------------------------------------
--- Table tb_clienteJuridico
--- -----------------------------------------------------
-DROP TABLE IF EXISTS tb_clienteJuridico ;
-
-CREATE TABLE IF NOT EXISTS tb_clienteJuridico (
-  id_clienteJuridico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  cnpj VARCHAR(20) UNIQUE NOT NULL,
-  id_cliente INT NOT NULL,
-  FOREIGN KEY (id_cliente) REFERENCES tb_cliente (id_cliente)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
@@ -477,6 +422,149 @@ BEGIN
 	SELECT * FROM tb_endereco e INNER JOIN tb_pessoa p USING(id_endereco)
     INNER JOIN tb_funcionario f USING(id_pessoa) WHERE f.matricula_funcionario = pmatricula_funcionario;
 	
+END$$
+
+DELIMITER ;
+
+
+
+/********PROCEDURE DE CADASTRAR O CLIENTE********/
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_client_save`;
+
+DELIMITER $$
+USE `db_acrilbox`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_client_save`(
+	pnomePessoa VARCHAR(45),
+    pemail VARCHAR(45),
+    ptelefone VARCHAR(16),
+    pcpf_cnpj VARCHAR(14), 
+	ptipo_cliente ENUM('Fisico', 'Juridico'),
+	pcep VARCHAR(9),
+    puf VARCHAR(2),
+    pcidade VARCHAR(45),
+    pbairro VARCHAR(45),
+    plogradouro VARCHAR(45),
+    pnumero INT(11),
+    pcomplemento VARCHAR(30),
+	plimite_credito DOUBLE
+)
+BEGIN 
+	DECLARE vid_endereco INT;
+	DECLARE vid_pessoa INT;
+	
+	INSERT INTO tb_endereco (logradouro, cidade, uf, cep, numero, complemento, bairro)
+	VALUES (plogradouro, pcidade, puf, pcep, pnumero, pcomplemento, pbairro);
+	
+	SET vid_endereco = LAST_INSERT_ID();
+	
+	INSERT INTO tb_pessoa (nomePessoa, email, telefone, id_endereco)
+	VALUES (pnomePessoa, pemail, ptelefone, vid_endereco);
+	
+	SET vid_pessoa = LAST_INSERT_ID();
+	
+	INSERT INTO tb_cliente(cpf_cnpj, limite_credito, tipo_cliente, id_pessoa)
+	VALUES (pcpf_cnpj, plimite_credito, ptipo_cliente, vid_pessoa);
+		
+	SELECT * FROM tb_endereco e INNER JOIN tb_pessoa p USING(id_endereco)
+    INNER JOIN tb_cliente c USING(id_pessoa) WHERE c.id_cliente = LAST_INSERT_ID();
+	
+END$$
+
+DELIMITER ;
+
+/********PROCEDURE DE ATUALIZAR O CLIENTE********/
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_client_update`;
+
+DELIMITER $$
+USE `db_acrilbox`$$
+CREATE PROCEDURE `sp_client_update` (
+	pid_cliente INT,
+    pnomePessoa VARCHAR(45),
+    pemail VARCHAR(45),
+    ptelefone VARCHAR(16),
+    pcpf_cnpj VARCHAR(14), 
+	ptipo_cliente ENUM('Fisico', 'Juridico'),
+	pcep VARCHAR(9),
+    puf VARCHAR(2),
+    pcidade VARCHAR(45),
+    pbairro VARCHAR(45),
+    plogradouro VARCHAR(45),
+    pnumero INT(11),
+    pcomplemento VARCHAR(30),
+	plimite_credito DOUBLE
+)
+BEGIN 
+	DECLARE vid_endereco INT;
+	DECLARE vid_pessoa INT;
+	
+	SELECT id_pessoa INTO vid_pessoa
+	FROM tb_cliente
+	WHERE id_cliente = pid_cliente;
+	
+	SELECT id_endereco INTO vid_endereco
+	FROM tb_pessoa
+	WHERE id_pessoa = vid_pessoa;
+	
+	UPDATE tb_endereco
+	SET 
+		cep = pcep,
+		uf = puf,
+		cidade = pcidade,
+		bairro = pbairro,
+		logradouro = plogradouro,
+		numero = pnumero,
+		complemento = pcomplemento
+	WHERE id_endereco = vid_endereco;
+	
+	UPDATE tb_pessoa
+	SET 
+		nomePessoa = pnomePessoa,
+		email = pemail,
+		telefone = ptelefone
+	WHERE id_pessoa = vid_pessoa;
+	
+	UPDATE tb_cliente
+	SET 
+		cpf_cnpj = pcpf_cnpj,
+        limite_credito = plimite_credito,
+		tipo_cliente = ptipo_cliente
+	WHERE id_pessoa = vid_pessoa;
+
+	SELECT * FROM tb_endereco e INNER JOIN tb_pessoa p USING(id_endereco)
+    INNER JOIN tb_cliente c USING(id_pessoa) WHERE c.id_cliente= pid_cliente;
+	
+END$$
+
+DELIMITER ;
+
+/********PROCEDURE DE DELETAR O CLIENTE********/
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_client_delete`;
+
+DELIMITER $$
+USE `db_acrilbox`$$
+CREATE PROCEDURE `sp_client_delete` (
+	pid_cliente INT
+)
+BEGIN
+	DECLARE vid_pessoa INT;
+	DECLARE vid_endereco INT;
+	
+	SELECT id_pessoa INTO vid_pessoa
+	FROM tb_cliente
+	WHERE id_cliente = pid_cliente;
+	
+	SELECT id_endereco INTO vid_endereco
+	FROM tb_pessoa
+	WHERE id_pessoa = vid_pessoa;
+	
+	DELETE FROM tb_cliente WHERE id_cliente = pid_cliente;
+	DELETE FROM tb_pessoa WHERE id_pessoa = vid_pessoa;
+    DELETE FROM tb_endereco WHERE id_endereco = vid_endereco;
+    
+
 END$$
 
 DELIMITER ;
