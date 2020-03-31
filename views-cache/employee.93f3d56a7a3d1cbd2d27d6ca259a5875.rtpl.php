@@ -47,10 +47,6 @@
                     </tr>
                     <?php } ?>
                 </tbody>
-            </table>
-        </div>
-        <div id="to-view">
-            <h2 class="mb-4">Funcionário</h2>
-           
+            </table>        
         </div>
         </div>

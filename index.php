@@ -18,6 +18,7 @@
 	require_once("product.php");
 	require_once("service.php");
 	require_once("supplier.php");
+	require_once("budget.php");
 	
 	/*
 	 * Fazer Pedido
