@@ -1,4 +1,4 @@
-            <h2 class="mb-4">Fornecedor</h2>
+<?php if(!class_exists('Rain\Tpl')){exit;}?>            <h2 class="mb-4">Fornecedor</h2>
             <form action="/Fornecedor/CadastroFornecedor" method="post">
                 <div class="form-group">
                     <label for="idNome">Nome<i class="importante">*</i></label>

@@ -570,5 +570,142 @@ END$$
 DELIMITER ;
 
 
+/********PROCEDURE DE INSERIR FORNECEDOR********/
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_supplier_save`;
+
+DELIMITER $$
+USE `db_acrilbox`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_supplier_save`(
+	pnomePessoa VARCHAR(45),
+    pemail VARCHAR(45),
+    ptelefone VARCHAR(16),
+    pcpf_cnpj VARCHAR(14), 
+	ptipo_fornecedor ENUM('Fisico', 'Juridico'),
+	pcep VARCHAR(9),
+    puf VARCHAR(2),
+    pcidade VARCHAR(45),
+    pbairro VARCHAR(45),
+    plogradouro VARCHAR(45),
+    pnumero INT(11),
+    pcomplemento VARCHAR(30)
+)
+BEGIN 
+	DECLARE vid_endereco INT;
+	DECLARE vid_pessoa INT;
+	
+	INSERT INTO tb_endereco (logradouro, cidade, uf, cep, numero, complemento, bairro)
+	VALUES (plogradouro, pcidade, puf, pcep, pnumero, pcomplemento, pbairro);
+	
+	SET vid_endereco = LAST_INSERT_ID();
+	
+	INSERT INTO tb_pessoa (nomePessoa, email, telefone, id_endereco)
+	VALUES (pnomePessoa, pemail, ptelefone, vid_endereco);
+	
+	SET vid_pessoa = LAST_INSERT_ID();
+	
+	INSERT INTO tb_fornecedor(cpf_cnpj, tipo_fornecedor, id_pessoa)
+	VALUES (pcpf_cnpj, ptipo_fornecedor, vid_pessoa);
+		
+	SELECT * FROM tb_endereco e INNER JOIN tb_pessoa p USING(id_endereco)
+    INNER JOIN tb_fornecedor f USING(id_pessoa) WHERE f.id_fornecedor = LAST_INSERT_ID();
+	
+END$$
+
+DELIMITER ;
 
 
+/********PROCEDURE DE ATUALIZAR FORNECEDOR********/
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_supplier_update`;
+
+DELIMITER $$
+USE `db_acrilbox`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_supplier_update`(
+	pid_fornecedor INT,
+    pnomePessoa VARCHAR(45),
+    pemail VARCHAR(45),
+    ptelefone VARCHAR(16),
+    pcpf_cnpj VARCHAR(14), 
+	ptipo_fornecedor ENUM('Fisico', 'Juridico'),
+	pcep VARCHAR(9),
+    puf VARCHAR(2),
+    pcidade VARCHAR(45),
+    pbairro VARCHAR(45),
+    plogradouro VARCHAR(45),
+    pnumero INT(11),
+    pcomplemento VARCHAR(30)
+)
+BEGIN 
+	DECLARE vid_endereco INT;
+	DECLARE vid_pessoa INT;
+	
+	SELECT id_pessoa INTO vid_pessoa
+	FROM tb_fornecedor
+	WHERE id_fornecedor = pid_fornecedor;
+	
+	SELECT id_endereco INTO vid_endereco
+	FROM tb_pessoa
+	WHERE id_pessoa = vid_pessoa;
+	
+	UPDATE tb_endereco
+	SET 
+		cep = pcep,
+		uf = puf,
+		cidade = pcidade,
+		bairro = pbairro,
+		logradouro = plogradouro,
+		numero = pnumero,
+		complemento = pcomplemento
+	WHERE id_endereco = vid_endereco;
+	
+	UPDATE tb_pessoa
+	SET 
+		nomePessoa = pnomePessoa,
+		email = pemail,
+		telefone = ptelefone
+	WHERE id_pessoa = vid_pessoa;
+	
+	UPDATE tb_fornecedor
+	SET 
+		cpf_cnpj = pcpf_cnpj,
+		tipo_fornecedor = ptipo_fornecedor
+	WHERE id_pessoa = vid_pessoa;
+
+	SELECT * FROM tb_endereco e INNER JOIN tb_pessoa p USING(id_endereco)
+    INNER JOIN tb_fornecedor f USING(id_pessoa) WHERE f.id_fornecedor= pid_fornecedor;
+	
+END$$
+
+DELIMITER ;
+
+
+/********PROCEDURE DE DELETAR FORNECEDOR********/
+USE `db_acrilbox`;
+DROP procedure IF EXISTS `sp_supplier_delete`;
+
+DELIMITER $$
+USE `db_acrilbox`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_supplier_delete`(
+	pid_fornecedor INT
+)
+BEGIN
+	DECLARE vid_pessoa INT;
+	DECLARE vid_endereco INT;
+	
+	SELECT id_pessoa INTO vid_pessoa
+	FROM tb_fornecedor
+	WHERE id_fornecedor = pid_fornecedor;
+	
+	SELECT id_endereco INTO vid_endereco
+	FROM tb_pessoa
+	WHERE id_pessoa = vid_pessoa;
+	
+	DELETE FROM tb_fornecedor WHERE id_fornecedor = pid_fornecedor;
+	DELETE FROM tb_pessoa WHERE id_pessoa = vid_pessoa;
+    DELETE FROM tb_endereco WHERE id_endereco = vid_endereco;
+    
+
+END$$
+
+DELIMITER ;
