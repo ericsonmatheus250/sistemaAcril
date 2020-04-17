@@ -11174,11 +11174,14 @@ a[data-toggle="collapse"] {
 /* print e to view*/
 
 #view {
+    width: 680px;
+    height: 842;
     z-index: 1000;
     background-color: #f9f9f9;
     box-shadow: 2px 2px 2px 0.1px rgba(227, 227, 227, 0.7);
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 150px;
 }
 
 #body-view {
@@ -11190,12 +11193,20 @@ a[data-toggle="collapse"] {
     display: none;
 }
 
-.tableView {
-    width: 500px;
-    margin-bottom: 20px;
-}
-
-td {
-    border: 1px solid #666;
-    padding: 5px;
+@media print {
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+    #printable {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 14px;
+    }
+    #printable~* {
+        display: none;
+    }
 }
