@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/res/system/css/bootstrap.min.css">
     <link rel="stylesheet" href="/res/system/css/index.css">
     <script src="https://kit.fontawesome.com/98046bca06.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -330,6 +331,7 @@
                     </tr>
                 </tbody>
             </table>
+<<<<<<< HEAD
             <div id="body-view">
                
             <div id="view" class="container">
@@ -384,25 +386,91 @@
                         <option>...</option>
                     </select>
                     </div>
+=======
+            <div id="body-view" class="col-sm-12 col-md-12 col-lg-12">
+                <div id="view" class="tab-content responsive">
+                    <div class="table-responsive col-sm-12 col-md-12 col-lg-12">
+                        <h1>Dados gerais</h1>
+>>>>>>> 6de0ef01a2d7fad17be95c10ce08c254c4b9df44
 
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label for="cep">CEP<i class="importante">*</i></label>
-                            <input type="text" class="form-control" id="cep" name="cep" value="" maxlength="9" onblur="pesquisacep(this.value);" onkeypress="formatar('#####-###', this)">
-                        </div>
-                        <div class="form-group col-md-1">
-                            <label for="uf">Estado</label>
-                            <input type="text" class="form-control" id="uf" name="uf">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="cidade">Cidade</label>
-                            <input type="text" class="form-control" id="cidade" name="cidade">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="bairro">Bairro</label>
-                            <input type="text" class="form-control" id="bairro" name="bairro">
+                        <table class="table table-bordered tableView" cellspacing="0" cellspadding="0">
+                            <tbody>
+                                <tr>
+                                    <th>Nome</th>
+                                    <td>Vitor dos santos abreu</td>
+                                </tr>
+                                <tr>
+                                    <th>CPF</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>RG</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Telefone</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Sexo</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Data de nascimento</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>E-mail</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>CEP</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Estado</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Cidade</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Bairro</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Logradouro</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Número</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Completo</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Observações</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Situação</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Cadastrado em</th>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="container">
+                            <button type="submit " class="btn btn-primary "><i class="imprimir fas fa-print"></i> Imprimir</button>
+                            <button type="submit " class="btn btn-danger btn-close" style="float: right; ">Cancelar</button>
                         </div>
                     </div>
+<<<<<<< HEAD
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -428,8 +496,10 @@
                     <button type="submit " class="btn btn-primary "><i class="fas fa-print"></i>Imprimir</button>
                     <button type="submit " class="btn btn-danger btn-close " style="float: right; ">Cancelar</button>
                 </form>
+=======
+                </div>
+>>>>>>> 6de0ef01a2d7fad17be95c10ce08c254c4b9df44
             </div>
-        </div>
         </div>
         <script src="/res/system/js/funcoes.js"></script>
         <script src="/res/system/js/jquery.min.js"></script>
@@ -437,12 +507,31 @@
         <script src="/res/system/js/bootstrap.min.js"></script>
         <script src="/res/system/js/main.js"></script>
         <script>
-            $(".btn-view").on("click", function(){
-    $("#body-view").css({"display": "block", "transition": "10s"})
-})
-$(".btn-close").on("click", function(){
-    $("#body-view").css({"display": "none", "transition": "10s"})
-})
+            $(".btn-view").on("click", function() {
+                $("#body-view").css({
+                    "display": "block",
+                    "transition": "10s"
+                })
+            })
+            $(".btn-close").on("click", function() {
+                $("#body-view").css({
+                    "display": "none",
+                    "transition": "10s"
+                })
+            })
+
+            function printBy() {
+                var $print = $("#imprimir")
+                    .clone()
+                    .addClass('print')
+                    .prependTo('body');
+
+                // Stop JS execution
+                window.print();
+
+                // Remove div once printed
+                $print.remove();
+            }
         </script>
 
 </body>
