@@ -95,3 +95,9 @@ function pesquisacep(valor) {
     }
 };
 
+$(".btn-view").on("click", function(){
+    $("#body-view").css({"display": "block", "transition": "10s"})
+})
+$(".btn-close").on("click", function(){
+    $("#body-view").css({"display": "none", "transition": "10s"})
+})
