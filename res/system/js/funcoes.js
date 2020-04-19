@@ -101,3 +101,13 @@ $(".btn-view").on("click", function(){
 $(".btn-close").on("click", function(){
     $("#body-view").css({"display": "none", "transition": "10s"})
 })
+
+//imprimir uma div
+
+function PrintDiv() {
+    var divToPrint = document.getElementById('printarea');
+    var popupWin = window.open('', '_blank', 'width=680,height=840,location=no,left=200px');
+    popupWin.document.open();
+    popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+    popupWin.document.close();
+}

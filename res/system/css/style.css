@@ -11181,7 +11181,7 @@ a[data-toggle="collapse"] {
     box-shadow: 2px 2px 2px 0.1px rgba(227, 227, 227, 0.7);
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: 150px;
+    margin-left: 300px;
 }
 
 #body-view {
@@ -11192,8 +11192,6 @@ a[data-toggle="collapse"] {
     position: absolute;
     display: none;
 }
-<<<<<<< HEAD
-=======
 
 @media print {
     html,
@@ -11212,4 +11210,3 @@ a[data-toggle="collapse"] {
         display: none;
     }
 }
->>>>>>> 6de0ef01a2d7fad17be95c10ce08c254c4b9df44
