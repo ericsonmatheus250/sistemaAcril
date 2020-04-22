@@ -40,7 +40,7 @@
                         <td><?php echo htmlspecialchars( $value1["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                         <td>Ativo</td>
                         <td>
-                            <a class="btn btn-outline-success" title="visualizar"><i class="fas fa-search"></i></a>
+                            <a class="btn btn-view btn-outline-success" title="visualizar"><i class="fas fa-search"></i></a>
                             <a href="/Funcionario/<?php echo htmlspecialchars( $value1["matricula_funcionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
                             <a href="/Funcionario/<?php echo htmlspecialchars( $value1["matricula_funcionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onCLick="return confirm('Deseja realmente apagar este registro?')" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
                         </td>
@@ -48,5 +48,91 @@
                     <?php } ?>
                 </tbody>
             </table>        
+        </div>
+        <div id="body-view" class="col-sm-12 col-md-12 col-lg-12">
+            <div id="view" class="tab-content responsive">
+                <div class="table-responsive col-sm-12 col-md-12 col-lg-12">
+                    <div id="printarea">
+                    <h1>Dados gerais</h1>
+
+                    <table class="table table-bordered tableView" cellspacing="0" cellspadding="0">
+                        <tbody>
+                            <tr>
+                                <th>Nome</th>
+                                <td>Vitor dos santos abreu</td>
+                            </tr>
+                            <tr>
+                                <th>CPF</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>RG</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Telefone</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Sexo</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Data de nascimento</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>E-mail</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>CEP</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Estado</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Cidade</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Bairro</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Logradouro</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Número</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Completo</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Observações</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Situação</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Cadastrado em</th>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="container">
+                        <button type="submit " class="btn btn-primary " onclick="PrintDiv()" value="Print"><i class="imprimir fas fa-print"></i> Imprimir</button>
+                        <button type="submit " class="btn btn-danger btn-close" style="float: right; ">Cancelar</button>
+                    </div>
+                </div>
+            </div>
         </div>
         </div>

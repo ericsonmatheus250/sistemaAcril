@@ -95,13 +95,6 @@ function pesquisacep(valor) {
     }
 };
 
-$(".btn-view").on("click", function(){
-    $("#body-view").css({"display": "block", "transition": "10s"})
-})
-$(".btn-close").on("click", function(){
-    $("#body-view").css({"display": "none", "transition": "10s"})
-})
-
 //imprimir uma div
 
 function PrintDiv() {
@@ -111,3 +104,6 @@ function PrintDiv() {
     popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
     popupWin.document.close();
 }
+
+
+
