@@ -23,14 +23,14 @@
 	/*
 	 * Fazer Pedido
 	 */
-	$app->get('/NovoOrcamento', function()
-	{
-		User::verifyLogin();
+	// $app->get('/NovoOrcamento', function()
+	// {
+	// 	User::verifyLogin();
 		
-		$page = new Page();
+	// 	$page = new Page();
 
-		$page->setTpl("budget");
-	});
+	// 	$page->setTpl("budget");
+	// });
 
 
 	$app->run();

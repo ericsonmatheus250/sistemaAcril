@@ -2,27 +2,23 @@
     <h2 class="mb-4">Nova venda</h2>
     <h3 class="mb-3" style="color: #aeaeae;">Dados da venda</h3>
     <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="numero">Número</label>
-            <input type="number" class="form-control" name="numero" id="numero">
-        </div>
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-6">
             <label for="cliente">Nome do cliente</label>
             <input type="text" class="form-control" name="cliente" id="cliente">
         </div>
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-6">
             <label for="vendendor">Nome do vendedor</label>
-            <input type="text" class="form-control" name="vendendor" id="vendedor">
+            <input type="text" class="form-control" name="vendendor" id="vendedor" value="{$name}">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="data">Data</label>
-            <input type="text" class="form-control" name="data" id="data">
+            <input type="date" class="form-control" name="data" id="data">
         </div>
         <div class="form-group col-md-2">
-            <label for="dataValidade">Data entrega</label>
-            <input type="text" class="form-control" name="dataValidade" id="dataValidade">
+            <label for="dataEntrega">Data entrega</label>
+            <input type="date" class="form-control" name="dataEntrega" id="dataEntrega">
 
         </div>
     </div>
