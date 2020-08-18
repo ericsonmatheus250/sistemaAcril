@@ -1,4 +1,4 @@
-            <div class="container">
+<?php if(!class_exists('Rain\Tpl')){exit;}?>            <div class="container">
             <h2> Cadastrar Produto</h2>
                 <form>
                     <h3 class="mb-4" style="color: #aeaeae;">Dados</h3>

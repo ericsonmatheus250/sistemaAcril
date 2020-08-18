@@ -43,6 +43,9 @@
     box-sizing: border-box;
 }
 
+@import "/07_trumps/07_trumps.css";
+@import "/05_objects/05_objects.css";
+
 html {
     font-family: sans-serif;
     line-height: 1.15;
@@ -11170,43 +11173,3 @@ a[data-toggle="collapse"] {
     padding-bottom: 20px;
 }
 
-
-/* print e to view*/
-
-#view {
-    width: 680px;
-    height: 842;
-    z-index: 1000;
-    background-color: #f9f9f9;
-    box-shadow: 2px 2px 2px 0.1px rgba(227, 227, 227, 0.7);
-    margin-top: 40px;
-    margin-bottom: 20px;
-    margin-left: 300px;
-}
-
-#body-view {
-    background-color: rgba(0, 0, 0, 0.8);
-    width: 100%;
-    margin-left: -250px;
-    margin-top: -550px;
-    position: absolute;
-    display: none;
-}
-
-@media print {
-    html,
-    body {
-        margin: 0;
-        padding: 0;
-        border: 0;
-    }
-    #printable {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 14px;
-    }
-    #printable~* {
-        display: none;
-    }
-}
