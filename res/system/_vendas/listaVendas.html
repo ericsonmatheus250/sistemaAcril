@@ -3,17 +3,16 @@
 
 <head>
     <title>Home</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/res/system/css/style.css">
-    <link rel="stylesheet" href="/res/system/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/res/system/css/index.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
     <script src="https://kit.fontawesome.com/98046bca06.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -21,31 +20,34 @@
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="p-4 pt-5">
-                <a href="#" class="img logo rounded-square mb-5" style="background-image: url(/images/Logo2.png);"></a>
+                <a href="#" class="img logo rounded-square mb-5" style="background-image: url(images/Logo2.png);"></a>
                 <ul class="list-unstyled components mb-5">
                     <li class="active">
                         <a href="#idCadastro" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-list-alt"> Cadastrar</span></a>
                         <ul class="collapse list-unstyled" id="idCadastro">
                             <li>
-                                <a href="ListaFuncinarios.html">Funcionario</a>
+                                <a href="/_cadastro/ListaFuncinarios.html">Funcionário</a>
                             </li>
                             <li>
-                                <a href="CadastroCliente.html">Cliente</a>
+                                <a href="/_cadastro/ListaClientes.html">Cliente</a>
                             </li>
                             <li>
-                                <a href="CadastroFornecedor.html">Fornecedor</a>
+                                <a href="/_cadastro/ListaFornecedor.html">Fornecedor</a>
                             </li>
                             <li>
-                                <a href="CadastrarProduto.html">Produto</a>
+                                <a href="/_cadastro/ListaProduto.html">Produto</a>
                             </li>
                             <li>
-                                <a href="CadastroServiços.html">Serviço</a>
+                                <a href="#">Serviço</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#idEstoqueMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fa fa-box"> Estoque</span></a>
                         <ul class="collapse list-unstyled" id="idEstoqueMenu">
+                            <li>
+                                <a href="#">Movimentação</a>
+                            </li>
                             <li>
                                 <a href="#">Acessorios</a>
                             </li>
@@ -54,6 +56,12 @@
                             </li>
                             <li>
                                 <a href="#">Pronta entrega</a>
+                            </li>
+                            <li>
+                                <a href="#">Cotação</a>
+                            </li>
+                            <li>
+                                <a href="#">Compras</a>
                             </li>
 
                         </ul>
@@ -71,7 +79,7 @@
                                 <a href="#">Serviços</a>
                             </li>
                             <li>
-                                <a href="#">Vidros</a>
+                                <a href="/_vendas/CriarOrcament.html">Vidros</a>
                             </li>
                         </ul>
                     </li>
@@ -216,6 +224,9 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="#"><span class="fa fa-book"> Tabela</span></a>
+                    </li>
+                    <li>
                         <a href="#"><span class="fa fa-edit"> Contratos</span></a>
                     </li>
                     <li>
@@ -223,6 +234,9 @@
                     </li>
                     <li>
                         <a href="#"><span class="fa fa-address-book"> Agenda</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-tools"> Configuração</span></a>
                     </li>
                 </ul>
 
@@ -257,7 +271,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="index.html">Home</a>
+                                <a class="nav-link" href="#">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Sobre</a>
@@ -268,179 +282,83 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Contato</a>
                             </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <h2 class="mb-4"><i class="fas fa-address-card"></i> Funcionário</h2>
-            <nav class="navbar navbar-expand-sm">
-                <div class="container-fluid">
-                    <button type="submit" class="btn btn-primary"><a href="/res/system/_cadastro/CadastroFuncionario.html" style="color:green;">Adicionar</a></button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-
-                                <form class="form-inline">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Procurar</button>
-                                </form>
-
+                            <li class="nav-item active usuario" onClick="navUser()">
+                                <a class="nav-link" href="#"><i class="fas fa-user-alt"></i> Vitor Abreu <i class="fas fa-caret-down"></i>
+                                    <div class="hidden" id="mostrarUser" >
+                                        <img src="images/icone-user.jpg" alt="#"> <br>
+                                        <i>vitor dos Santos Abreu</i>
+                                        <button  class="bLeft btn-dark">Meus dados</button>
+                                        <button class="bRight btn-dark">Sair</button>
+                                    </div>
+                                </a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
             </nav>
-            <table class="table">
-                <caption>Lista de Funcionários</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">E-mail</th>
-                        <th scope="col">Número</th>
-                        <th scope="col">Estado</th>
-                        <th scope="colgroup">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>vitor santos</td>
-                        <td>@gmail</td>
-                        <td>(61)9 9996-3966</td>
-                        <td>ativo</td>
-                        <td>
-                            <a class="btn btn-outline-success btn-view" title="visualizar"><i class="fas fa-search"></i></a>
-                            <a href="#" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
-                            <a href="#" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Ericson</td>
-                        <td>@hotmail</td>
-                        <td>(61)0 0000-0000</td>
-                        <td>desativado</td>
-                        <td>
-                            <a class="btn btn-outline-success" title="visualizar"><i class="fas fa-search"></i></a>
-                            <a href="#" class="btn btn-outline-warning" title="Editar"><i class="fas fa-user-edit"></i></a>
-                            <a href="#" class="btn btn-outline-danger" title="Remove"><i class="fas fa-remove"></i></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            
-        </div>
-        <div id="body-view">
-        <div class="display" class="col-sm-12 col-md-12 col-lg-12">
-            <div class="view" class="tab-content responsive">
-                <div class="table-responsive col-sm-12 col-md-12 col-lg-12">
-                    <div id="printarea">
-                    <h1>Dados gerais</h1>
+            <div class="box box-light">
+                <div class="box-body">
+                    <h3 class="txt text-secondary"><i class="fas fa-chart-bar"></i> Vendas</h3>
+                    <div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <td scope="col">Data</td>
+                                    <th scope="col">cliente</th>
+                                    <th scope="col">Projeto</th>
+                                    <th scope="col">Situação</th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>02/02/2000</td>
+                                    <td>Ericsson</td>
+                                    <td>box 1,20 m²</td>
+                                    <td>Produção</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>02/02/2000</td>
+                                    <td>Ericsson</td>
+                                    <td>box 1,20 m²</td>
+                                    <td>Aguardando</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>02/02/2000</td>
+                                    <td>Ericsson</td>
+                                    <td>box 1,20 m²</td>
+                                    <td>Cancelado</td>
+                                </tr>
+                            </thead>
 
-                    <table class="table table-bordered tableView" cellspacing="0" cellspadding="0">
+                        </table>
+                    </div>
+                    <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <th>Nome</th>
-                                <td>Vitor dos santos abreu</td>
-                            </tr>
-                            <tr>
-                                <th>CPF</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>RG</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Telefone</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Sexo</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Data de nascimento</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>E-mail</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>CEP</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Estado</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Cidade</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Bairro</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Logradouro</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Número</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Completo</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Observações</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Situação</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>Cadastrado em</th>
-                                <td></td>
+                                <td colspan="3">
+                                    <div class="text-right text-muted" style="padding-top:9px">
+                                        <i>
+                                        <a class="text-muted" href="/_vendas/CriarOrcament.html"><i class="fa fa-angle-double-right margin-right-5px"></i>Novo Orçamento</a>
+                                        </i>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                    <div class="container">
-                        <button type="submit " class="btn btn-primary " onclick="PrintDiv()" value="Print"><i class="imprimir fas fa-print"></i> Imprimir</button>
-                        <button type="submit " class="btn btn-danger btn-close" style="float: right; ">Cancelar</button>
-                    </div>
-                </div>
+
             </div>
+            
         </div>
-        </div>
-        <script src="/res/system/js/funcoes.js"></script>
-        <script src="/res/system/js/jquery.min.js"></script>
-        <script src="/res/system/js/popper.js"></script>
-        <script src="/res/system/js/bootstrap.min.js"></script>
-        <script src="/res/system/js/main.js"></script>
-        <script>
-            $(".btn-view").on("click", function() {
-            $("#body-view").css({
-                "display": "block",
-                "transition": "10s"
-                })
-            })
-            $(".btn-close").on("click", function() {
-            $("#body-view").css({
-                "display": "none",
-                "transition": "10s"
-                })
-            })
-        </script>
-        
+        <script src="js/funcoes.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
 </body>
 
 </html>
